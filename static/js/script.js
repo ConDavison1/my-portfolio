@@ -1,4 +1,3 @@
-// Smooth Scroll Effect
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -6,7 +5,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Intersection Observer for Scroll Animations
+// Intersection Observer 
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.target.id === 'intro') {
@@ -17,19 +16,19 @@ const observer = new IntersectionObserver(entries => {
             entry.target.classList.toggle('visible', entry.isIntersecting);
         }
 
-        // Handle the "About" section header, text, and image fade-in
+
         if (entry.target.id === 'about') {
             const aboutHeader = document.querySelector('.about h1');
             const aboutText = document.querySelector('.about-text');
-            const aboutImage = document.querySelector('.about-image'); // Add Image
+            const aboutImage = document.querySelector('.about-image');
             if (entry.isIntersecting) {
                 aboutHeader.classList.add('visible');
                 aboutText.classList.add('visible');
-                aboutImage.classList.add('visible'); // Fade in image
+                aboutImage.classList.add('visible');
             } else {
                 aboutHeader.classList.remove('visible');
                 aboutText.classList.remove('visible');
-                aboutImage.classList.remove('visible'); // Fade out image
+                aboutImage.classList.remove('visible');
             }
         }
     });
