@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connor Davison's Portfolio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+    <!-- Navigation Section -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#intro" class="nav-link">Home</a>
+            <a href="#about" class="nav-link">About</a>
+            <a href="#projects" class="nav-link">Projects</a>
+            <a href="#stack" class="nav-link">Tech Stack</a>
+            <a href="#resume" class="nav-link">Resume</a>
+        </div>
+        <div class="social-links">
+            <a href="https://github.com/ConDavison1" target="_blank">
+                <img src="static/images/GitHub.png" alt="GitHub" class="social-icon">
+            </a>
+            <a href="https://www.linkedin.com/in/connor-davison-1a7367279/" target="_blank">
+                <img src="static/images/Linkedin.png" alt="LinkedIn" class="social-icon">
+            </a>
+            <a href="mailto:c.davison18@gmail.com">
+                <img src="static/images/gmail.png" alt="Email" class="social-icon">
+            </a>
+        </div>
+    </nav>
+
+
+    <!-- Intro Section -->
+    <section class="intro" id="intro">
+        <div class="intro-content">
+            <div class="intro-text">
+                <h1>Hi, I'm Connor Davison</h1>
+                <p>Software Developer</p>
+            </div>
+            <div class="intro-image">
+                <img src="static/images/me.png" alt="Connor Davison" />
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="about-text">
+            <h1>About Me</h1>
+            <p>Hello! I'm Connor Davison, a passionate software developer with a love for creating user-friendly and
+                visually appealing applications.</p>
+            <p>I specialize in full-stack development and enjoy blending creativity with technical skills to solve
+                real-world problems.</p>
+            <p>I'm graduating from SAIT with a Diploma in Software Development in the Spring 2025, and I'll pursue a
+                Computer
+                Science degree at the University of Lethbridge, graduating in 2027.</p>
+        </div>
+        <div class="about-image">
+            <img src="static/images/question.png" alt="About Image">
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="projects-header">
+            <h1>My Projects</h1>
+        </div>
+        {% for project in projects %}
+        <div class="project-card">
+            <img src="{{ url_for('static', filename='images/fitquest_portfolio.png') }}"
+                alt="{{ project.title }} Screenshot" class="project-image">
+            <h2>{{ project.title }}</h2>
+            <p>{{ project.description }}</p>
+            <a href="{{ project.url }}" target="_blank" class="project-link">View Project</a>
+        </div>
+        {% endfor %}
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section id="stack" class="stack">
+        <header class="stack-header">
+            <h1>My Tech Stack</h1>
+        </header>
+        <div class="stack-card">
+            <img src="{{ url_for('static', filename='images/Python.png') }}" alt="Python Logo">
+
+        </div>
+
+    </section>
+
+    <section id="resume" class="resume">
+        <div class="resume-box">
+            <h1>My Resume</h1>
+            <a href="{{ url_for('static', filename='files/ConnorDavisonResume.pdf') }}" target="_blank">View Resume</a>
+
+
+            <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+
+</html>

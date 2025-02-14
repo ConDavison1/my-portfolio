@@ -1,0 +1,50 @@
+# Ignore virtual environment and environment variables
+venv/
+.env*
+*.env*
+
+# Byte-compiled / cached files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# IDE and editor files
+.vscode/
+*.swp
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Logs and databases
+*.log
+*.sqlite3
+*.db
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Ignore Docker and Compose files
+docker-compose.override.yml
+docker-compose.yaml
+Dockerfile
+.dockerignore
+
+# Ignore test coverage and reports
+htmlcov/
+.coverage
+*.cover
+*.pycoverage
+
+# Ignore Jupyter Notebooks checkpoints 
+.ipynb_checkpoints/
+
+# Ignore node_modules (if using npm for front-end)
+node_modules/
+npm-debug.log*
+
+# Ignore build artifacts
+build/
+dist/
+*.egg-info/
