@@ -218,7 +218,6 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    /* Center vertically */
     padding: 50px;
     opacity: 0;
     transition: opacity 1s ease-out;
@@ -329,10 +328,10 @@ body {
 }
 
 .stack-card {
-    background-color: #150c1d;
+    background-color: #100f13;
     padding: 30px;
     border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    ;
     color: #fff;
     max-width: 600px;
     text-align: center;
@@ -340,11 +339,36 @@ body {
     animation: fadeIn 1.5s ease-in-out;
 }
 
+/* Tech Stack Icon */
 .stack-card img {
-    width: 300px;
-    height: 200px;
+    width: 100px;
+    height: 50px;
     margin-bottom: 20px;
+    animation: float 3s ease-in-out infinite;
+    display: block;
+    margin: 0 auto;
 }
+
+/* Floating animation */
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.stack-card img:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
 
 .stack-card h2 {
     font-size: 1.5rem;
