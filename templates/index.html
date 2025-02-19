@@ -62,21 +62,36 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="projects-header">
-            <h1>My Projects</h1>
+<!-- Projects Section -->
+<section id="projects" class="projects">
+    <div class="projects-header">
+        <h1>My Projects</h1>
+    </div>
+    <div class="project-container">
+        <div class="project-cards-wrapper">
+            {% for project in projects %}
+            <div class="project-card">
+                <img src="{{ url_for('static', filename='images/fitquest_portfolio.png') }}"
+                    alt="{{ project.title }} Screenshot" class="project-image">
+                <h2>{{ project.title }}</h2>
+                <p>{{ project.description }}</p>
+                <a href="{{ project.url }}" target="_blank" class="project-link">View Project</a>
+            </div>
+            {% endfor %}
         </div>
+        <button class="arrow-left">←</button>
+        <button class="arrow-right">→</button>
+    </div>
+
+    <div class="project-dots">
         {% for project in projects %}
-        <div class="project-card">
-            <img src="{{ url_for('static', filename='images/fitquest_portfolio.png') }}"
-                alt="{{ project.title }} Screenshot" class="project-image">
-            <h2>{{ project.title }}</h2>
-            <p>{{ project.description }}</p>
-            <a href="{{ project.url }}" target="_blank" class="project-link">View Project</a>
-        </div>
+        <span class="dot"></span>
         {% endfor %}
-    </section>
+    </div>
+</section>
+
+
+
 
     <!-- Tech Stack Section -->
     <section id="stack" class="stack">
