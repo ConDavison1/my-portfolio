@@ -2,123 +2,217 @@ document.addEventListener('DOMContentLoaded', function () {
     const projectCards = document.querySelectorAll('.project-card');
     const arrowLeft = document.querySelector('.arrow-left');
     const arrowRight = document.querySelector('.arrow-right');
+    const dots = document.querySelectorAll('.dot');
     let currentProjectIndex = 0;
+    let isTransitioning = false;
 
-    // Function to show a specific project card with sliding effect
-    function showProject(index, direction = 'right') {
+    function showProject(index, direction) {
+        if (isTransitioning) return;
+        isTransitioning = true;
+
+        if (index < 0) {
+            index = projectCards.length - 1;
+        } else if (index >= projectCards.length) {
+            index = 0;
+        }
+
         projectCards.forEach((card, i) => {
-            card.classList.remove('visible', 'slide-left', 'slide-right'); // Reset all previous states
+            card.classList.remove('visible', 'slide-left', 'slide-right');
+            card.style.transition = 'transform 0.5s ease, opacity 0.5s ease';
+            card.style.opacity = '0';
+            card.style.transform = '';
+
 
             if (i === index) {
-                card.classList.add('visible'); // Show the current project card
-                card.style.transition = 'transform 0.5s ease'; // Apply smooth transition
+                card.classList.add('visible');
+                card.style.opacity = '1';
+                card.style.transform = 'translateX(0)';
+            } else if (i === currentProjectIndex) {
+                card.style.opacity = '0';
+                card.style.transform = direction === 'right' ? 'translateX(-100%)' : 'translateX(100%)';
             } else {
-                // Add slide direction to the other cards
-                card.classList.add(direction === 'right' ? 'slide-right' : 'slide-left');
-                card.style.transition = 'transform 0.5s ease'; // Apply transition for sliding effect
+                card.style.transform = direction === 'right' ? 'translateX(100%)' : 'translateX(-100%)';
             }
         });
+
+        updateActiveDot(index);
+        currentProjectIndex = index;
+        setTimeout(() => { isTransitioning = false; }, 500);
     }
 
-    // Ensure the first project is visible initially
-    showProject(currentProjectIndex, 'right');
+    function updateActiveDot(index) {
+        dots.forEach(dot => dot.classList.remove('active'));
+        dots[index].classList.add('active');
+    }
 
-    // Event listeners for arrow navigation
     arrowLeft.addEventListener('click', () => {
-        currentProjectIndex = (currentProjectIndex === 0) ? projectCards.length - 1 : currentProjectIndex - 1;
-        showProject(currentProjectIndex, 'left'); // Slide left when going back
+        showProject(currentProjectIndex - 1, 'left');
     });
 
     arrowRight.addEventListener('click', () => {
-        currentProjectIndex = (currentProjectIndex === projectCards.length - 1) ? 0 : currentProjectIndex + 1;
-        showProject(currentProjectIndex, 'right'); // Slide right when moving forward
+        showProject(currentProjectIndex + 1, 'right');
     });
-});
 
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-    });
-});
-
-// Intersection Observer for sections
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.target.id === 'intro') {
-            entry.target.classList.toggle('hidden', !entry.isIntersecting);
-        }
-
-        if (entry.target.id === 'about') {
-            const aboutHeader = document.querySelector('.about h1');
-            const aboutText = document.querySelector('.about-text');
-            const aboutImage = document.querySelector('.about-image');
-            if (entry.isIntersecting) {
-                aboutHeader.classList.add('visible');
-                aboutText.classList.add('visible');
-                aboutImage.classList.add('visible');
-            } else {
-                aboutHeader.classList.remove('visible');
-                aboutText.classList.remove('visible');
-                aboutImage.classList.remove('visible');
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            if (index !== currentProjectIndex) {
+                showProject(index, index > currentProjectIndex ? 'right' : 'left');
             }
-        }
-
-        if (entry.target.id === 'projects') {
-            entry.target.classList.toggle('visible', entry.isIntersecting);
-        }
+        });
     });
-}, { threshold: 0.2 });
 
-const projects = document.querySelector('.projects');
-const aboutSection = document.querySelector('#about');
+   
+    showProject(currentProjectIndex, 'right');  
 
-// Observe the sections, not the individual project cards
-observer.observe(document.querySelector('#intro'));
-observer.observe(projects);
-observer.observe(aboutSection);
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+        });
+    });
 
-// Get all the dots and project cards
-const dots = document.querySelectorAll('.dot');
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.target.id === 'intro') {
+                entry.target.classList.toggle('hidden', !entry.isIntersecting);
+            }
+
+            if (entry.target.id === 'about') {
+                const aboutHeader = document.querySelector('.about h1');
+                const aboutText = document.querySelector('.about-text');
+                const aboutImage = document.querySelector('.about-image');
+                if (entry.isIntersecting) {
+                    aboutHeader.classList.add('visible');
+                    aboutText.classList.add('visible');
+                    aboutImage.classList.add('visible');
+                } else {
+                    aboutHeader.classList.remove('visible');
+                    aboutText.classList.remove('visible');
+                    aboutImage.classList.remove('visible');
+                }
+            }
+
+            if (entry.target.id === 'projects') {
+                entry.target.classList.toggle('visible', entry.isIntersecting);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    observer.observe(document.querySelector('#intro'));
+    observer.observe(document.querySelector('#projects'));
+    observer.observe(document.querySelector('#about'));
+});
+document.addEventListener('DOMContentLoaded', function () {
+    const hamburgerIcon = document.getElementById('hamburger-icon');
+    const navbarContainer = document.querySelector('.navbar-container');
+
+    hamburgerIcon.addEventListener('click', function () {
+        navbarContainer.classList.toggle('active');
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.target.id === 'intro') {
+                entry.target.classList.toggle('hidden', !entry.isIntersecting);
+            }
+
+            if (entry.target.id === 'about') {
+                const aboutHeader = document.querySelector('.about h1');
+                const aboutText = document.querySelector('.about-text');
+                const aboutImage = document.querySelector('.about-image');
+                if (entry.isIntersecting) {
+                    aboutHeader.classList.add('visible');
+                    aboutText.classList.add('visible');
+                    aboutImage.classList.add('visible');
+                } else {
+                    aboutHeader.classList.remove('visible');
+                    aboutText.classList.remove('visible');
+                    aboutImage.classList.remove('visible');
+                }
+            }
+
+            if (entry.target.id === 'projects') {
+                entry.target.classList.toggle('visible', entry.isIntersecting);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    observer.observe(document.querySelector('#intro'));
+    observer.observe(document.querySelector('#projects'));
+    observer.observe(document.querySelector('#about'));
+});
+
+let startX, endX, isSwiping = false;
+const projectContainer = document.querySelector('.project-container');
 const projectCards = document.querySelectorAll('.project-card');
 
-// Function to update active dot
-function updateActiveDot(index) {
-    dots.forEach(dot => dot.classList.remove('active')); // Remove active class from all dots
-    dots[index].classList.add('active'); // Add active class to the current dot
-}
 
-// Initially set the first dot to active
-updateActiveDot(0);
+projectCards[0].classList.add('visible');
 
-// Function to update the class of project cards for sliding
-function updateSlide(currentIndex) {
-    projectCards.forEach((card, index) => {
-        // Remove sliding classes from all project cards
-        card.classList.remove('slide-left', 'slide-right');
-        
-        // Add slide-left or slide-right based on the index
-        if (index < currentIndex) {
-            card.classList.add('slide-left');
-        } else if (index > currentIndex) {
-            card.classList.add('slide-right');
+
+projectContainer.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    isSwiping = true;
+});
+
+projectContainer.addEventListener('touchmove', (e) => {
+    if (!isSwiping) return;
+    endX = e.touches[0].clientX;
+});
+
+projectContainer.addEventListener('touchend', () => {
+    if (isSwiping) {
+        if (startX - endX > 50) {
+            moveToNextProject();
+        } else if (endX - startX > 50) {
+            moveToPreviousProject(); 
         }
-    });
+    }
+    isSwiping = false;
+});
+
+
+projectContainer.addEventListener('mousedown', (e) => {
+    startX = e.clientX;
+    isSwiping = true;
+});
+
+projectContainer.addEventListener('mousemove', (e) => {
+    if (!isSwiping) return;
+    endX = e.clientX;
+});
+
+projectContainer.addEventListener('mouseup', () => {
+    if (isSwiping) {
+        if (startX - endX > 50) {
+            moveToNextProject(); 
+        } else if (endX - startX > 50) {
+            moveToPreviousProject(); 
+        }
+    }
+    isSwiping = false;
+});
+
+// Show next project
+function moveToNextProject() {
+    const currentProject = document.querySelector('.project-card.visible');
+    const nextProject = currentProject.nextElementSibling || projectCards[0]; 
+    currentProject.classList.remove('visible');
+    nextProject.classList.add('visible');
 }
 
-// Event listeners for the arrows
-let currentIndex = 0; // Keep track of the current project
-
-document.querySelector('.arrow-left').addEventListener('click', () => {
-    currentIndex = (currentIndex > 0) ? currentIndex - 1 : projectCards.length - 1; // Move left, loop around if at the first project
-    updateActiveDot(currentIndex);
-    updateSlide(currentIndex); // Update the sliding classes based on the current index
-});
-
-document.querySelector('.arrow-right').addEventListener('click', () => {
-    currentIndex = (currentIndex < projectCards.length - 1) ? currentIndex + 1 : 0; // Move right, loop around if at the last project
-    updateActiveDot(currentIndex);
-    updateSlide(currentIndex); // Update the sliding classes based on the current index
-});
-
+// Show previous project
+function moveToPreviousProject() {
+    const currentProject = document.querySelector('.project-card.visible');
+    const prevProject = currentProject.previousElementSibling || projectCards[projectCards.length - 1]; 
+    currentProject.classList.remove('visible');
+    prevProject.classList.add('visible');
+}

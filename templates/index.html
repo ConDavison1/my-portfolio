@@ -6,30 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connor Davison's Portfolio</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
 </head>
 
 <body>
-    <!-- Navigation Section -->
-    <nav class="navbar">
-        <div class="navbar-container">
-            <a href="#intro" class="nav-link">Home</a>
-            <a href="#about" class="nav-link">About</a>
-            <a href="#projects" class="nav-link">Projects</a>
-            <a href="#stack" class="nav-link">Tech Stack</a>
-            <a href="#resume" class="nav-link">Resume</a>
-        </div>
-        <div class="social-links">
-            <a href="https://github.com/ConDavison1" target="_blank">
-                <img src="static/images/GitHub.png" alt="GitHub" class="social-icon">
-            </a>
-            <a href="https://www.linkedin.com/in/connor-davison-1a7367279/" target="_blank">
-                <img src="static/images/Linkedin.png" alt="LinkedIn" class="social-icon">
-            </a>
-            <a href="mailto:c.davison18@gmail.com">
-                <img src="static/images/gmail.png" alt="Email" class="social-icon">
-            </a>
-        </div>
-    </nav>
+<!-- Navigation Section -->
+<nav class="navbar">
+    <div class="navbar-container">
+        <a href="#intro" class="nav-link">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#stack" class="nav-link">Tech Stack</a>
+        <a href="#experience" class="nav-link">Experience</a>
+    </div>
+
+    <!-- Hamburger Icon for Mobile -->
+    <div class="hamburger" id="hamburger-icon">
+        <i class="fa fa-bars"></i>
+    </div>
+
+    <!-- Social Links -->
+    <div class="social-links">
+        <a href="https://github.com/ConDavison1" target="_blank">
+            <img src="{{ url_for('static', filename='images/GitHub.png') }}" alt="GitHub" class="social-icon">
+        </a>
+        <a href="https://www.linkedin.com/in/connor-davison-1a7367279/" target="_blank">
+            <img src="{{ url_for('static', filename='images/Linkedin.png') }}" alt="LinkedIn" class="social-icon">
+        </a>
+        <a href="mailto:c.davison18@gmail.com">
+            <img src="{{ url_for('static', filename='images/gmail.png') }}" alt="Email" class="social-icon">
+        </a>
+    </div>
+</nav>
+
+
 
 
     <!-- Intro Section -->
@@ -40,77 +51,246 @@
                 <p>Software Developer</p>
             </div>
             <div class="intro-image">
-                <img src="static/images/me.png" alt="Connor Davison" />
+                <img src="{{ url_for('static', filename='images/me.png') }}" alt="Connor Davison" />
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="about-text">
-            <h1>About Me</h1>
-            <p>Hello! I'm Connor Davison, a passionate software developer with a love for creating user-friendly and
-                visually appealing applications.</p>
-            <p>I specialize in full-stack development and enjoy blending creativity with technical skills to solve
-                real-world problems.</p>
-            <p>I'm graduating from SAIT with a Diploma in Software Development in the Spring 2025, and I'll pursue a
-                Computer
-                Science degree at the University of Lethbridge, graduating in 2027.</p>
-        </div>
-        <div class="about-image">
-            <img src="static/images/question.png" alt="About Image">
-        </div>
-    </section>
-
-<!-- Projects Section -->
-<section id="projects" class="projects">
-    <div class="projects-header">
-        <h1>My Projects</h1>
+<!-- About Section -->
+<section id="about" class="about">
+    <div class="about-text">
+        <h1 class="visible">About Me</h1>
+        <p class="visible">Hello! I'm Connor Davison, a passionate software developer with a love for creating user-friendly and visually appealing applications.</p>
+        <p class="visible">I specialize in full-stack development and enjoy blending creativity with technical skills to solve real-world problems.</p>
+        <p class="visible">I'm graduating from SAIT with a Diploma in Software Development in Spring 2025, and I will pursue a Computer Science degree at the University of Lethbridge, graduating in 2027.</p>
     </div>
-    <div class="project-container">
-        <div class="project-cards-wrapper">
-            {% for project in projects %}
-            <div class="project-card">
-                <img src="{{ url_for('static', filename='images/fitquest_portfolio.png') }}"
-                    alt="{{ project.title }} Screenshot" class="project-image">
-                <h2>{{ project.title }}</h2>
-                <p>{{ project.description }}</p>
-                <a href="{{ project.url }}" target="_blank" class="project-link">View Project</a>
-            </div>
-            {% endfor %}
-        </div>
-        <button class="arrow-left">←</button>
-        <button class="arrow-right">→</button>
-    </div>
-
-    <div class="project-dots">
-        {% for project in projects %}
-        <span class="dot"></span>
-        {% endfor %}
+    <div class="about-image">
+        <img src="{{ url_for('static', filename='images/question.png') }}" alt="About Image">
     </div>
 </section>
 
 
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="projects-header">
+            <h1>My Projects</h1>
+        </div>
+        <div class="project-container">
+            <div class="project-cards-wrapper">
+                {% for project in projects %}
+                <div class="project-card">
+                    <img src="{{ url_for('static', filename=project.image_url) }}" alt="Project Image">
+                    <h2>{{ project.title }}</h2>
+                    <p>{{ project.description }}</p>
+                    <a href="{{ project.url }}" target="_blank" class="project-link">View Project</a>
+                </div>
+                {% endfor %}
+            </div>
+            <button class="arrow-left">←</button>
+            <button class="arrow-right">→</button>
+        </div>
 
-
-    <!-- Tech Stack Section -->
-    <section id="stack" class="stack">
-        <header class="stack-header">
-            <h1>My Tech Stack</h1>
-        </header>
-        <div class="stack-card">
-            <img src="{{ url_for('static', filename='images/Python.png') }}" alt="Python Logo">
+        <div class="project-dots">
+            {% for project in projects %}
+            <span class="dot"></span>
+            {% endfor %}
         </div>
     </section>
 
-    <section id="resume" class="resume">
-        <div class="resume-box">
-            <h1>My Resume</h1>
-            <a href="{{ url_for('static', filename='files/ConnorDavisonResume.pdf') }}" target="_blank">View Resume</a>
+<!-- Tech Stack -->
+<section id="stack" class="stack">
+    <header class="stack-header">
+        <h1>My Tech Stack</h1>
+    </header>
+
+    <div class="stack-category-container">
+        <!-- Programming Languages -->
+        <div class="stack-category">
+            <h2>Programming Languages</h2>
+            <div class="stack-container">
+                <div class="stack-card">
+                    <i class="fa-brands fa-python fa-3x"></i>
+                    <h3>Python</h3>
+                    <div class="stars">★★★★☆</div>
+                </div>
+                <div class="stack-card">
+                    <i class="fa-brands fa-java fa-3x"></i>
+                    <h3>Java</h3>
+                    <div class="stars">★★★★☆</div>
+                </div>
+                <div class="stack-card">
+                    <i class="fa-brands fa-js fa-3x"></i>
+                    <h3>JavaScript</h3>
+                    <div class="stars">★★★☆☆</div>
+                </div>
+                <div class="stack-card">
+                    <i class="fa-solid fa-c"></i>
+                    <h3>C#</h3>
+                    <div class="stars">★★★★☆</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Web Development -->
+        <div class="stack-category">
+            <h2>Web Development</h2>
+            <div class="stack-container">
+                <div class="stack-card">
+                    <i class="fa-brands fa-html5 fa-3x"></i>
+                    <h3>HTML</h3>
+                    <div class="stars">★★★★☆</div>
+                </div>
+                <div class="stack-card">
+                    <i class="fa-brands fa-css3-alt fa-3x"></i>
+                    <h3>Tailwind CSS</h3>
+                    <div class="stars">★★★★☆</div>
+                </div>
+                <div class="stack-card">
+                    <i class="fa-brands fa-react fa-3x"></i>
+                    <h3>React</h3>
+                    <div class="stars">★★★★☆</div>
+                </div>
+                <div class="stack-card">
+                    <i class="fa-brands fa-angular fa-3x"></i>
+                    <h3>Angular</h3>
+                    <div class="stars">★★★☆☆</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Version Control -->
+        <div class="stack-category">
+            <h2>Version Control</h2>
+            <div class="stack-container">
+                <div class="stack-card">
+                    <i class="fa-brands fa-github fa-3x"></i>
+                    <h3>GitHub</h3>
+                    <div class="stars">★★★★★</div>
+                </div>
+                <div class="stack-card">
+                    <i class="fa-brands fa-git-alt fa-3x"></i>
+                    <h3>Git</h3>
+                    <div class="stars">★★★★★</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Frameworks -->
+        <div class="stack-category">
+            <h2>Frameworks</h2>
+            <div class="stack-container">
+                <div class="stack-card">
+                    <i class="fa-brands fa-node fa-3x"></i>
+                    <h3>Node.js</h3>
+                    <div class="stars">★★★★☆</div>
+                </div>
+                <div class="stack-card">
+                    <i class="fa-brands fa-python fa-3x"></i>
+                    <h3>Flask</h3>
+                    <div class="stars">★★★☆☆</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Database Management -->
+        <div class="stack-category">
+            <h2>Database Management</h2>
+            <div class="stack-container">
+                <div class="stack-card">
+                    <i class="fa-solid fa-database fa-3x"></i>
+                    <h3>SQL</h3>
+                    <div class="stars">★★★★☆</div>
+                </div>
+                <div class="stack-card">
+                    <i class="fa-solid fa-leaf fa-3x"></i>
+                    <h3>MongoDB</h3>
+                    <div class="stars">★★★☆☆</div>
+                </div>
+                <div class="stack-card">
+                    <i class="fa-solid fa-cloud fa-3x"></i>
+                    <h3>Neon DB</h3>
+                    <div class="stars">★★★☆☆</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="resume" class="resume">
+    <div class="container">
+        <div class="section-title">
+            <h2>Summary</h2>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12" data-aos="fade-up">
+                <div class="resume-item pb-0">
+                    <h4>Connor Davison</h4>
+                    <p>
+                        <em>Motivated Software Developer student with hands-on experience in back-end development, web development, 
+                            and data analytics. Proficient in Python, Java, and JavaScript, with expertise in frameworks like Flask, Angular, 
+                            and React. Skilled in designing and implementing scalable back-end systems, creating intuitive user interfaces, 
+                            and integrating APIs for seamless data flow. Demonstrated leadership and collaboration through capstone 
+                            projects and non-profit work, excelling in Agile workflows and version control systems like Git. </em>
+                    </p>
+                    <ul>
+                        <li>Extensive experience in developing and maintaining web applications</li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-6" data-aos="fade-up">
+                    <h3 class="resume-title">Education</h3>
+                    <div class="resume-item">
+                        <h4>Diploma in Software Development</h4>
+                        <p><em>Southern Alberta Institute of Technology, Calgary</em></p>
+                        <p><em>2023-2025</em></p>
+                    </div>
+                    <div class="resume-item">
+                        <h4>Bachelor of Computer Science</h4>
+                        <p><em>University of Lethbridge</em></p>
+                        <p><em>2025-2027</em></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="experience" class="resume">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                <h3 class="resume-title">Experience</h3>
+            </div>
+
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="resume-item" style="margin-top: 80px">
+                    <h4>Back-End Developer</h4>
+                    <h5>October 2023 – March 2024</h5>
+                    <p><em>Help Us Defend Non-Profit (Calgary, AB)</em></p>
+                    <ul>
+                        <li>Developed an algorithm using Python to determine login pass/fail results based on AI model confidence 
+                            levels. </li>
+                        <li>Collaborated with a team using GitLab for code integration, improving project efficiency and code 
+                            quality. </li>
+                        <li>Ensured system security and integrity by implementing robust backend processes for handling user 
+                            authentication data. </li>
+                    </ul>
+                </div>
 
 
-            <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+    
+    
+
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 
 </html>

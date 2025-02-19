@@ -33,10 +33,12 @@ def add_project():
     if not data or 'title' not in data or 'description' not in data or 'url' not in data:
         return jsonify({'error': 'Missing required fields'}), 400
 
+    
     new_project = Project(
         title=data['title'],
         description=data['description'],
-        url=data['url']
+        url=data['url'],
+        image_url=data.get('image_url') 
     )
 
     try:
@@ -46,7 +48,8 @@ def add_project():
             'id': new_project.id,
             'title': new_project.title,
             'description': new_project.description,
-            'url': new_project.url
+            'url': new_project.url,
+            'image_url': new_project.image_url  
         }}), 201
     except IntegrityError as e:
         db.session.rollback()
