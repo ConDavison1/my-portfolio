@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let offset = 0; 
     
             if (this.getAttribute('href') === "#experience") {
-                offset = 800; 
+                offset = 850; 
             }
     
             const top = target.getBoundingClientRect().top + window.scrollY - offset;
@@ -84,33 +84,67 @@ document.addEventListener('DOMContentLoaded', function () {
         navbarContainer.classList.toggle('active');
     });
 
-    // Intersection Observer for animations
+    // Intersection Observer
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
+        
             if (entry.target.id === 'intro') {
                 entry.target.classList.toggle('hidden', !entry.isIntersecting);
             }
-
+    
             if (entry.target.id === 'about') {
                 const aboutHeader = document.querySelector('.about h1');
                 const aboutText = document.querySelector('.about-text');
-                const aboutImage = document.querySelector('.about-image');
+                const aboutInfo = document.querySelector('.about-info');  
+    
                 if (entry.isIntersecting) {
                     aboutHeader.classList.add('visible');
                     aboutText.classList.add('visible');
-                    aboutImage.classList.add('visible');
+                    aboutInfo.classList.add('visible');
                 } else {
                     aboutHeader.classList.remove('visible');
                     aboutText.classList.remove('visible');
-                    aboutImage.classList.remove('visible');
+                    aboutInfo.classList.remove('visible');
                 }
             }
-
+    
             if (entry.target.id === 'projects') {
                 entry.target.classList.toggle('visible', entry.isIntersecting);
             }
+    
+            if (entry.target.classList.contains('stack')) {
+                entry.target.classList.toggle('visible', entry.isIntersecting);
+            }
+    
+            if (entry.target.classList.contains('resume')) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    entry.target.classList.remove('hidden');
+                } else {
+                    entry.target.classList.add('hidden');
+                    entry.target.classList.remove('visible');
+                }
+            }
         });
-    }, { threshold: 0.2 });
+    }, { threshold: 0 });
+    
+// Observe all relevant sections
+document.querySelectorAll('#intro, #about, #projects, .stack, .resume').forEach(section => {
+    observer.observe(section);
+});
+    
+
+// Observe all relevant sections
+document.querySelectorAll('#intro, #about, #projects, .stack, .resume').forEach(section => {
+    observer.observe(section);
+});
+
+
+// Observe all relevant sections
+document.querySelectorAll('#intro, #about, #projects, .stack').forEach(section => {
+    observer.observe(section);
+});
+
 
     ['#intro', '#projects', '#about'].forEach(id => observer.observe(document.querySelector(id)));
 
@@ -146,4 +180,129 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     projectContainer.addEventListener('mouseup', handleSwipe);
+});
+
+// Get the hamburger icon, sidebar, body, and all sidebar links
+const hamburgerIcon = document.getElementById('hamburger-icon');
+const sidebar = document.getElementById('sidebar');
+const body = document.body;
+const sidebarLinks = document.querySelectorAll('#sidebar .nav-link'); // All links inside the sidebar
+
+// Toggle the 'active' class on the sidebar and prevent scrolling on the body
+hamburgerIcon.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    body.classList.toggle('sidebar-open'); // Disable scrolling when the sidebar is open
+});
+
+// Close sidebar when a link inside the sidebar is clicked
+sidebarLinks.forEach(link => {
+    link.addEventListener('click', function() {
+        sidebar.classList.remove('active'); // Close the sidebar
+        body.classList.remove('sidebar-open'); // Enable scrolling
+    });
+});
+/**
+ * Hero type effect
+ */
+const typed = document.querySelector('.typed');
+if (typed) {
+    let typed_strings = typed.getAttribute('data-typed-items');
+    typed_strings = typed_strings.split(',');
+    new Typed('.typed', {
+        strings: typed_strings,
+        loop: true,
+        typeSpeed: 100,
+        backSpeed: 50,
+        backDelay: 2000
+    });
+}
+
+
+// Initialize particles.js configuration
+particlesJS('particles-js', {
+    "particles": {
+        "number": {
+            "value": 200, // Number of particles
+            "density": {
+                "enable": true,
+                "value_area": 1000 // Density area of particles
+            }
+        },
+        "color": {
+            "value": "#080516" // Particle color
+        },
+        "shape": {
+            "type": "polygon", // Shape of the particles
+            "stroke": {
+                "width": 0,
+                "color": "#000000"
+            },
+            "polygon": {
+                "nb_sides": 10
+            }
+        },
+        "opacity": {
+            "value": 0.5, // Opacity of particles
+            "random": true,
+            "anim": {
+                "enable": true,
+                "speed": 1,
+                "opacity_min": 0.1
+            }
+        },
+        "size": {
+            "value": 4, // Particle size
+            "random": true,
+            "anim": {
+                "enable": true,
+                "speed": 40,
+                "size_min": 0.1
+            }
+        },
+        "line_linked": {
+            "enable": true,
+            "distance": 150, // Distance between connected particles
+            "color": "#ffffff", // Line color
+            "opacity": 0.4,
+            "width": 1
+        },
+        "move": {
+            "enable": true,
+            "speed": 3,
+            "direction": "none",
+            "random": false,
+            "straight": false,
+            "out_mode": "out", // Particles will move out of the container
+            "bounce": false
+        }
+    },
+    "interactivity": {
+        "detect_on": "window",
+        "events": {
+            "onhover": {
+                "enable": true,
+                "mode": "repulse" // Repel particles when hovering over them
+            },
+            "onclick": {
+                "enable": true,
+                "mode": "push" // Push particles when clicking
+            }
+        },
+        "modes": {
+            "grab": {
+                "distance": 400,
+                "line_linked": {
+                    "opacity": 1
+                }
+            },
+            "repulse": {
+                "distance": 100,
+                "duration": 0.4
+            },
+            "push": {
+                "particles_nb": 4
+            }
+        }
+    },
+    "retina_detect": true
 });

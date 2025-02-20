@@ -11,63 +11,83 @@
 </head>
 
 <body>
-<!-- Navigation Section -->
-<nav class="navbar">
+<!-- Hamburger Icon for Mobile -->
+<div class="hamburger" id="hamburger-icon">
+    <i class="fa fa-bars"></i>
+</div>
+
+<!-- Sidebar Navigation -->
+<nav id="sidebar">
     <div class="navbar-container">
-        <a href="#intro" class="nav-link">Home</a>
-        <a href="#about" class="nav-link">About</a>
-        <a href="#projects" class="nav-link">Projects</a>
-        <a href="#stack" class="nav-link">Tech Stack</a>
-        <a href="#experience" class="nav-link">Experience</a>
-    </div>
-
-    <!-- Hamburger Icon for Mobile -->
-    <div class="hamburger" id="hamburger-icon">
-        <i class="fa fa-bars"></i>
-    </div>
-
-    <!-- Social Links -->
-    <div class="social-links">
-        <a href="https://github.com/ConDavison1" target="_blank">
-            <img src="{{ url_for('static', filename='images/GitHub.png') }}" alt="GitHub" class="social-icon">
-        </a>
-        <a href="https://www.linkedin.com/in/connor-davison-1a7367279/" target="_blank">
-            <img src="{{ url_for('static', filename='images/Linkedin.png') }}" alt="LinkedIn" class="social-icon">
-        </a>
-        <a href="mailto:c.davison18@gmail.com">
-            <img src="{{ url_for('static', filename='images/gmail.png') }}" alt="Email" class="social-icon">
-        </a>
+        <!-- Add picture at the top -->
+        <div class="sidebar-profile">
+            <img src="{{ url_for('static', filename='images/me.png') }}" alt="Connor Davison" />
+        </div>
+        <div>
+            <h1>Connor Davison</h1>
+        </div>
+        
+        <!-- Nav links with icons -->
+        <a href="#intro" class="nav-link"><i class="fa fa-home"></i> Home</a>
+        <a href="#about" class="nav-link"><i class="fa fa-user"></i> About</a>
+        <a href="#projects" class="nav-link"><i class="fa fa-briefcase"></i> Projects</a>
+        <a href="#stack" class="nav-link"><i class="fa fa-cogs"></i> Tech Stack</a>
+        <a href="#experience" class="nav-link"><i class="fa fa-graduation-cap"></i> Experience</a>
     </div>
 </nav>
 
 
+<!-- Intro Section -->
+<section class="intro" id="intro">
 
-
-    <!-- Intro Section -->
-    <section class="intro" id="intro">
-        <div class="intro-content">
-            <div class="intro-text">
-                <h1>Hi, I'm Connor Davison</h1>
-                <p>Software Developer</p>
-            </div>
-            <div class="intro-image">
-                <img src="{{ url_for('static', filename='images/me.png') }}" alt="Connor Davison" />
-            </div>
+    <div id="particles-js"></div>
+    
+    <div class="intro-content">
+        <div class="intro-text">
+            <h1>Hi, I'm Connor Davison</h1>
+            <p class="typed" data-typed-items="Software Developer, Web Developer, Full Stack Developer"></p>
         </div>
-    </section>
+    </div>
+</section>
+
+
 
 <!-- About Section -->
 <section id="about" class="about">
-    <div class="about-text">
-        <h1 class="visible">About Me</h1>
-        <p class="visible">Hello! I'm Connor Davison, a passionate software developer with a love for creating user-friendly and visually appealing applications.</p>
-        <p class="visible">I specialize in full-stack development and enjoy blending creativity with technical skills to solve real-world problems.</p>
-        <p class="visible">I'm graduating from SAIT with a Diploma in Software Development in Spring 2025, and I will pursue a Computer Science degree at the University of Lethbridge, graduating in 2027.</p>
+    <div class="about-header">
+        <h1>About</h1>
     </div>
-    <div class="about-image">
-        <img src="{{ url_for('static', filename='images/question.png') }}" alt="About Image">
+    <div class="about-content"> 
+        <div class="about-text">
+            <p class="visible">Hello! I'm Connor Davison, a passionate software developer with a love for creating user-friendly and visually appealing applications.</p>
+            <p class="visible">I specialize in full-stack development and enjoy blending creativity with technical skills to solve real-world problems.</p>
+            <p class="visible">I'm graduating from SAIT with a Diploma in Software Development in Spring 2025, and I will pursue a Computer Science degree at the University of Lethbridge, graduating in 2027.</p>
+        </div>
+        <div class="about-info">
+            <h2>Software Developer</h2>
+            <ul>
+                <li><strong><i class="fas fa-user"></i> Full Name:</strong> Connor Davison</li>
+                <li><strong><i class="fas fa-map-marker-alt"></i> Location:</strong> Calgary, Alberta, Canada</li>
+                <li><strong><i class="fas fa-envelope"></i> Email:</strong> c.davison18@gmail.com</li>
+            </ul>
+            <h2 class="social-header">Socials</h2>
+            <div class="socials">
+                <li>
+                    <a href="https://github.com/ConDavison1" target="_blank">
+                        <img src="{{ url_for('static', filename='images/Github.png') }}" alt="GitHub" />
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.linkedin.com/in/connor-davison-1a7367279/" target="_blank">
+                        <img src="{{ url_for('static', filename='images/Linkedin.png') }}" alt="LinkedIn" />
+                    </a>
+                </li>
+            </div>
+        </div>
     </div>
 </section>
+
+
 
 
     <!-- Projects Section -->
@@ -218,6 +238,9 @@
 
 <section id="resume" class="resume">
     <div class="container">
+        <header class="stack-header">
+            <h1>Experience</h1>
+        </header>
         <div class="section-title">
             <h2>Summary</h2>
         </div>
@@ -249,7 +272,7 @@
                         <p><em>2023-2025</em></p>
                     </div>
                     <div class="resume-item">
-                        <h4>Bachelor of Computer Science</h4>
+                        <h4>Bachelor of Science - Computer Science</h4>
                         <p><em>University of Lethbridge</em></p>
                         <p><em>2025-2027</em></p>
                     </div>
@@ -293,7 +316,11 @@
     
 
 
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
 </body>
 
 </html>
