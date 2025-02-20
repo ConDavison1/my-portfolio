@@ -10,18 +10,13 @@ document.addEventListener('DOMContentLoaded', function () {
         if (isTransitioning) return;
         isTransitioning = true;
 
-        if (index < 0) {
-            index = projectCards.length - 1;
-        } else if (index >= projectCards.length) {
-            index = 0;
-        }
+        if (index < 0) index = projectCards.length - 1;
+        if (index >= projectCards.length) index = 0;
 
         projectCards.forEach((card, i) => {
             card.classList.remove('visible', 'slide-left', 'slide-right');
             card.style.transition = 'transform 0.5s ease, opacity 0.5s ease';
             card.style.opacity = '0';
-            card.style.transform = '';
-
 
             if (i === index) {
                 card.classList.add('visible');
@@ -45,13 +40,8 @@ document.addEventListener('DOMContentLoaded', function () {
         dots[index].classList.add('active');
     }
 
-    arrowLeft.addEventListener('click', () => {
-        showProject(currentProjectIndex - 1, 'left');
-    });
-
-    arrowRight.addEventListener('click', () => {
-        showProject(currentProjectIndex + 1, 'right');
-    });
+    arrowLeft.addEventListener('click', () => showProject(currentProjectIndex - 1, 'left'));
+    arrowRight.addEventListener('click', () => showProject(currentProjectIndex + 1, 'right'));
 
     dots.forEach((dot, index) => {
         dot.addEventListener('click', () => {
@@ -61,49 +51,32 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-   
-    showProject(currentProjectIndex, 'right');  
+    // Initialize the first project
+    showProject(currentProjectIndex, 'right');
 
+    // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            
+            const target = document.querySelector(this.getAttribute('href'));
+            if (!target) return;
+    
+            let offset = 0; 
+    
+            if (this.getAttribute('href') === "#experience") {
+                offset = 800; 
+            }
+    
+            const top = target.getBoundingClientRect().top + window.scrollY - offset;
+    
+            window.scrollTo({ top, behavior: 'smooth' });
         });
     });
+    
+    
 
-
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.target.id === 'intro') {
-                entry.target.classList.toggle('hidden', !entry.isIntersecting);
-            }
-
-            if (entry.target.id === 'about') {
-                const aboutHeader = document.querySelector('.about h1');
-                const aboutText = document.querySelector('.about-text');
-                const aboutImage = document.querySelector('.about-image');
-                if (entry.isIntersecting) {
-                    aboutHeader.classList.add('visible');
-                    aboutText.classList.add('visible');
-                    aboutImage.classList.add('visible');
-                } else {
-                    aboutHeader.classList.remove('visible');
-                    aboutText.classList.remove('visible');
-                    aboutImage.classList.remove('visible');
-                }
-            }
-
-            if (entry.target.id === 'projects') {
-                entry.target.classList.toggle('visible', entry.isIntersecting);
-            }
-        });
-    }, { threshold: 0.2 });
-
-    observer.observe(document.querySelector('#intro'));
-    observer.observe(document.querySelector('#projects'));
-    observer.observe(document.querySelector('#about'));
-});
-document.addEventListener('DOMContentLoaded', function () {
+    // Mobile navigation
     const hamburgerIcon = document.getElementById('hamburger-icon');
     const navbarContainer = document.querySelector('.navbar-container');
 
@@ -111,13 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
         navbarContainer.classList.toggle('active');
     });
 
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-        });
-    });
-
+    // Intersection Observer for animations
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.target.id === 'intro') {
@@ -145,74 +112,38 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }, { threshold: 0.2 });
 
-    observer.observe(document.querySelector('#intro'));
-    observer.observe(document.querySelector('#projects'));
-    observer.observe(document.querySelector('#about'));
-});
+    ['#intro', '#projects', '#about'].forEach(id => observer.observe(document.querySelector(id)));
 
-let startX, endX, isSwiping = false;
-const projectContainer = document.querySelector('.project-container');
-const projectCards = document.querySelectorAll('.project-card');
+    // Swipe & Drag Support for Project Carousel
+    let startX, endX, isSwiping = false;
+    const projectContainer = document.querySelector('.project-container');
 
-
-projectCards[0].classList.add('visible');
-
-
-projectContainer.addEventListener('touchstart', (e) => {
-    startX = e.touches[0].clientX;
-    isSwiping = true;
-});
-
-projectContainer.addEventListener('touchmove', (e) => {
-    if (!isSwiping) return;
-    endX = e.touches[0].clientX;
-});
-
-projectContainer.addEventListener('touchend', () => {
-    if (isSwiping) {
-        if (startX - endX > 50) {
-            moveToNextProject();
-        } else if (endX - startX > 50) {
-            moveToPreviousProject(); 
-        }
+    function handleSwipe() {
+        if (!endX) return; 
+        if (startX - endX > 50) showProject(currentProjectIndex + 1, 'right');
+        else if (endX - startX > 50) showProject(currentProjectIndex - 1, 'left');
+        isSwiping = false;
     }
-    isSwiping = false;
+
+    projectContainer.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        isSwiping = true;
+    });
+
+    projectContainer.addEventListener('touchmove', (e) => {
+        if (isSwiping) endX = e.touches[0].clientX;
+    });
+
+    projectContainer.addEventListener('touchend', handleSwipe);
+
+    projectContainer.addEventListener('mousedown', (e) => {
+        startX = e.clientX;
+        isSwiping = true;
+    });
+
+    projectContainer.addEventListener('mousemove', (e) => {
+        if (isSwiping) endX = e.clientX;
+    });
+
+    projectContainer.addEventListener('mouseup', handleSwipe);
 });
-
-
-projectContainer.addEventListener('mousedown', (e) => {
-    startX = e.clientX;
-    isSwiping = true;
-});
-
-projectContainer.addEventListener('mousemove', (e) => {
-    if (!isSwiping) return;
-    endX = e.clientX;
-});
-
-projectContainer.addEventListener('mouseup', () => {
-    if (isSwiping) {
-        if (startX - endX > 50) {
-            moveToNextProject(); 
-        } else if (endX - startX > 50) {
-            moveToPreviousProject(); 
-        }
-    }
-    isSwiping = false;
-});
-
-// Show next project
-function moveToNextProject() {
-    const currentProject = document.querySelector('.project-card.visible');
-    const nextProject = currentProject.nextElementSibling || projectCards[0]; 
-    currentProject.classList.remove('visible');
-    nextProject.classList.add('visible');
-}
-
-// Show previous project
-function moveToPreviousProject() {
-    const currentProject = document.querySelector('.project-card.visible');
-    const prevProject = currentProject.previousElementSibling || projectCards[projectCards.length - 1]; 
-    currentProject.classList.remove('visible');
-    prevProject.classList.add('visible');
-}
