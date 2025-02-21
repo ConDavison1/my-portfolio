@@ -21,13 +21,13 @@ body {
     background-color: #080516;
     width: 30px;
     height: 30px;
-    border-radius: 50%;
-    padding: 0;
+    border-radius: 60%;
+    padding: 1px;
 }
 
 .hamburger i {
-    padding-left: 8px;
-    padding-top: 6px;
+    padding-left: 5px;
+    padding-top: 2px;
     color: white;
     display: flex;
 }
