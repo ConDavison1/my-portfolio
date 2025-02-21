@@ -5,10 +5,9 @@ body {
     padding: 0;
     box-sizing: border-box;
     font-family: 'raleway', sans-serif;
-    color: white;
-    overflow-x: hidden;
+    /* Note: “color: white” is overwritten by the next line */
     color: #080516;
-
+    overflow-x: hidden;
 }
 
 /*--------------------------------------------------------------
@@ -35,12 +34,7 @@ body {
     display: flex;
 }
 
-
-
-/*--------------------------------------------------------------
-# Sidebar Styles
---------------------------------------------------------------*/
-
+/* Sidebar Styles */
 #sidebar {
     position: fixed;
     top: 0;
@@ -110,13 +104,14 @@ body.sidebar-open {
     overflow: hidden;
 }
 
+/* Mobile and Tablet View */
 @media (max-width: 1199px) {
     #sidebar {
-        left: -250px;
+        left: -250px; /* Sidebar hidden by default */
     }
 
     #sidebar.active {
-        left: 0;
+        left: 0; /* Sidebar visible when active */
     }
 
     .hamburger {
@@ -129,7 +124,7 @@ body.sidebar-open {
     }
 
     .hamburger i {
-        font-size: 1rem;
+        font-size: 1.5rem;
         color: white;
     }
 
@@ -151,15 +146,25 @@ body.sidebar-open {
         width: 100px;
         height: 100px;
     }
+
+    /* Main content should shift when sidebar is active */
+    #main {
+        margin-left: 0;
+    }
+
+    body.sidebar-open #main {
+        margin-left: 250px; /* Shifts the main content when the sidebar is open */
+    }
 }
 
+/* Desktop View */
 @media (min-width: 1200px) {
     #sidebar {
-        left: 0;
+        left: 0; /* Sidebar is always visible on large screens */
     }
 
     .hamburger {
-        display: none;
+        display: none; /* Hide hamburger icon on large screens */
     }
 
     #sidebar .sidebar-profile img {
@@ -169,6 +174,11 @@ body.sidebar-open {
 
     #sidebar .nav-link {
         font-size: 1.2rem;
+    }
+
+    /* Main content margin */
+    #main {
+        margin-left: 250px;
     }
 }
 
@@ -188,11 +198,8 @@ body.sidebar-open {
     opacity: 1;
     transition: opacity 1s ease-out;
     overflow: hidden;
-    
-    margin-left: clamp(0px, 5vw, 150px);
+    margin-left: clamp(0px, 5vw, 150px); /* Adjust margin-left dynamically */
 }
-
-
 
 /* Particles container */
 #particles-js {
@@ -211,7 +218,7 @@ body.sidebar-open {
 
 .intro-content {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 100%;
     max-width: 1200px;
@@ -219,6 +226,7 @@ body.sidebar-open {
     color: #fff;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     gap: 4vw;
+    box-sizing: border-box; /* Ensure no content goes outside */
 }
 
 .typed {
@@ -235,6 +243,7 @@ body.sidebar-open {
     text-align: left;
     margin-right: 5vw;
     z-index: 1;
+    position: relative; /* Ensure it moves with screen */
 }
 
 .intro-image img {
@@ -246,10 +255,34 @@ body.sidebar-open {
     z-index: 1;
 }
 
+/*--------------------------------------------------------------
+# Responsive Adjustments for Intro Section
+--------------------------------------------------------------*/
 
+@media (max-width: 768px) {
+    /* Adjust intro layout for smaller screens */
+    .intro {
+        margin-left: 0; /* Remove margin-left when sidebar is hidden */
+        padding: 5% 5% 5% 5%; /* Adjust padding */
+    }
 
+    .intro-content {
+        flex-direction: column; /* Stack elements vertically on smaller screens */
+        gap: 2vw; /* Adjust gap for smaller screens */
+        width: 100%;
+        padding-left: 0; /* Remove padding for full width */
+    }
 
+    .intro-text {
+        margin-right: 0; /* Remove margin-right */
+        text-align: center; /* Center text for better readability */
+        position: relative; /* Ensure it moves with screen change */
+    }
 
+    .intro-image {
+        margin-top: 2vh; /* Add space above the image */
+    }
+}
 
 /*--------------------------------------------------------------
 # About Section
@@ -268,7 +301,6 @@ body.sidebar-open {
     transition: padding-left 0.3s ease;
     overflow-x: hidden;
     margin-left: clamp(0px, 5vw, 150px);
-    
 }
 
 .about-header {
@@ -285,10 +317,8 @@ body.sidebar-open {
     justify-content: space-between;
     align-items: flex-start;
     gap: 5vw;
-    /* Reduced gap */
     width: 100%;
     padding-left: clamp(5%, 10vw, 15%);
-    /* Adjusted padding */
     box-sizing: border-box;
     overflow-x: hidden;
 }
@@ -389,10 +419,6 @@ body.sidebar-open {
         padding-right: 0;
     }
 }
-
-
-
-
 
 /*--------------------------------------------------------------
 # Projects Section
@@ -572,9 +598,7 @@ body.sidebar-open {
     transition: background-color 0.3s ease;
 }
 
-
 @media (max-width: 768px) {
-
     .arrow-left,
     .arrow-right {
         visibility: hidden;
@@ -582,7 +606,6 @@ body.sidebar-open {
 }
 
 @media (max-width: 912px) {
-
     .arrow-left,
     .arrow-right {
         visibility: hidden;
@@ -590,13 +613,11 @@ body.sidebar-open {
 }
 
 @media (max-width: 1024px) {
-
     .arrow-left,
     .arrow-right {
         visibility: hidden;
     }
 }
-
 
 /*--------------------------------------------------------------
 # Stack Section
@@ -616,7 +637,6 @@ body.sidebar-open {
     margin-left: clamp(0px, 15vw, 280px);
 }
 
-
 .stack.visible {
     opacity: 1;
 }
@@ -631,7 +651,6 @@ body.sidebar-open {
     text-align: center;
     animation: fadeIn 1.5s ease-in-out;
 }
-
 
 .stack-category-container {
     display: flex;
@@ -690,11 +709,9 @@ body.sidebar-open {
     0% {
         transform: translateY(0px);
     }
-
     50% {
         transform: translateY(-5px);
     }
-
     100% {
         transform: translateY(0px);
     }
@@ -716,83 +733,25 @@ body {
     padding: 0;
     overflow-x: hidden;
     width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
-
-
-
-.fa-html5 {
-    color: #e34c26;
-}
-
-/* HTML */
-.fa-css3-alt {
-    color: #2965f1;
-}
-
-/* CSS */
-.fa-js {
-    color: #f7df1e;
-}
-
-/* JavaScript */
-.fa-python {
-    color: #3776ab;
-}
-
-/* Python */
-.fa-angular {
-    color: #dd0031;
-}
-
-/* Angular */
-.fa-java {
-    color: #f8981d;
-}
-
-/* Java */
-.fa-c {
-    color: #0078d4;
-}
-
-/* C# */
-.fa-react {
-    color: #61dafb;
-}
-
-/* React */
-.fa-github {
-    color: #24292f;
-}
-
-/* GitHub */
-.fa-git-alt {
-    color: #f14e32;
-}
-
-/* Git */
-.fa-node {
-    color: #8cc84b;
-}
-
-/* Node.js */
-.fa-database {
-    color: #0066cc;
-}
-
-/* SQL */
-.fa-leaf {
-    color: #4DB33D;
-}
-
-/* MongoDB */
-.fa-cloud {
-    color: #00A9E0;
-}
-
-/* Neon DB */
-
-
+/* Icon Colors */
+.fa-html5 { color: #e34c26; }
+.fa-css3-alt { color: #2965f1; }
+.fa-js { color: #f7df1e; }
+.fa-python { color: #3776ab; }
+.fa-angular { color: #dd0031; }
+.fa-java { color: #f8981d; }
+.fa-c { color: #0078d4; }
+.fa-react { color: #61dafb; }
+.fa-github { color: #24292f; }
+.fa-git-alt { color: #f14e32; }
+.fa-node { color: #8cc84b; }
+.fa-database { color: #0066cc; }
+.fa-leaf { color: #4DB33D; }
+.fa-cloud { color: #00A9E0; }
 
 /*--------------------------------------------------------------
 # Resume Section
@@ -864,24 +823,18 @@ body {
 
 .resume .resume-item ul {
     padding-left: 1.5rem;
-
     text-align: left;
     margin-top: 0.5rem;
-
 }
 
 .resume .resume-item ul li {
     font-size: clamp(0.85rem, 1.6vw, 1rem);
-
     margin-bottom: 0.5rem;
-
 }
 
 .resume .resume-item:last-child {
     padding-bottom: 0;
 }
-
-
 
 .resume .resume-item {
     padding: 2vw;
@@ -893,3 +846,58 @@ body {
     margin-bottom: 2vh;
     text-align: left;
 }
+
+/*--------------------------------------------------------------
+# Additional Responsive Tweaks for Extra Small Screens
+--------------------------------------------------------------*/
+@media (max-width: 480px) {
+    /* Intro Section Adjustments */
+    .intro {
+        padding: 8% 5%;
+        margin-left: 0;
+    }
+    .intro-content {
+        gap: 4vw;
+        flex-direction: column;
+    }
+    .intro-text {
+        font-size: clamp(1.2rem, 4vw, 2.5rem);
+        text-align: center;
+        margin-right: 0;
+    }
+    /* About Section Adjustments */
+    .about {
+        padding: 5% 3%;
+        margin-left: 0;
+    }
+    .about-content {
+        padding-left: 0;
+        gap: 3vw;
+    }
+    /* Stack Section Adjustments */
+    .stack {
+        margin-left: 0;
+        padding: 20px;
+    }
+    /* Resume Section Adjustments */
+    .resume {
+        margin-left: 0;
+        padding: 2vw;
+    }
+    /* Project Card Size Adjustments */
+    .project-card {
+        width: clamp(200px, 40vw, 300px);
+        height: clamp(300px, 55vw, 400px);
+    }
+}
+@media (min-width: 1200px) {
+    /* Adjust main content containers to account for the 250px sidebar */
+    #main,
+    .intro,
+    .about,
+    .stack,
+    .resume {
+      margin-left: 250px;
+    }
+  }
+  
