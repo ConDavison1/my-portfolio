@@ -63,7 +63,6 @@ body {
     object-fit: cover;
 }
 
-
 #sidebar .profile h1 {
     font-size: 1.5rem;
     margin: 15px 0;
@@ -72,11 +71,6 @@ body {
     text-align: center;
     font-family: "Poppins", sans-serif;
     color: white;
-}
-
-#sidebar .profile h1 a {
-    color: #fff;
-    text-decoration: none;
 }
 
 #sidebar .navbar-container {
@@ -106,7 +100,6 @@ body {
     object-fit: contain;
     margin: 0;
 }
-
 
 #sidebar .nav-link:hover {
     color: #3a3646;
@@ -179,17 +172,15 @@ body.sidebar-open {
     }
 }
 
-
-
-
-
 /*--------------------------------------------------------------
 # Introduction Section
 --------------------------------------------------------------*/
+
+/* Default state: with sidebar */
 .intro {
     min-height: 100vh;
-    flex-wrap: wrap;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     padding: 5vw;
@@ -197,13 +188,11 @@ body.sidebar-open {
     opacity: 1;
     transition: opacity 1s ease-out;
     overflow: hidden;
-    width: 90%;
-    max-width: 1200px;
-    margin: auto;
-    text-align: center;
-    width: calc(100vw - 280px);
-    margin-left: 250px;
+    
+    margin-left: clamp(0px, 5vw, 150px);
 }
+
+
 
 /* Particles container */
 #particles-js {
@@ -261,6 +250,7 @@ body.sidebar-open {
 
 
 
+
 /*--------------------------------------------------------------
 # About Section
 --------------------------------------------------------------*/
@@ -278,7 +268,7 @@ body.sidebar-open {
     transition: padding-left 0.3s ease;
     overflow-x: hidden;
     margin-left: clamp(0px, 5vw, 150px);
-    /* Reduced margin */
+    
 }
 
 .about-header {
