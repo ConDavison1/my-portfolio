@@ -269,7 +269,7 @@ body.sidebar-open {
     opacity: 1;
     transition: padding-left 0.3s ease;
     overflow-x: hidden; 
-    margin-left: clamp(0px, 15vw, 250px);
+    margin-left: clamp(0px, 5vw, 150px); /* Reduced margin */
 }
 
 .about-header {
@@ -285,9 +285,9 @@ body.sidebar-open {
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 10vw;
+    gap: 5vw; /* Reduced gap */
     width: 100%;
-    padding-left: 15%;
+    padding-left: clamp(5%, 10vw, 15%); /* Adjusted padding */
     box-sizing: border-box;
     overflow-x: hidden; 
 }
@@ -371,7 +371,6 @@ body.sidebar-open {
     list-style-type: none;
     padding: 0;
 }
-
 
 @media (max-width: 768px) {
     .about-content {
