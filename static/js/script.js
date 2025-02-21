@@ -182,25 +182,26 @@ document.querySelectorAll('#intro, #about, #projects, .stack').forEach(section =
     projectContainer.addEventListener('mouseup', handleSwipe);
 });
 
-// Get the hamburger icon, sidebar, body, and all sidebar links
+
 const hamburgerIcon = document.getElementById('hamburger-icon');
 const sidebar = document.getElementById('sidebar');
 const body = document.body;
-const sidebarLinks = document.querySelectorAll('#sidebar .nav-link'); // All links inside the sidebar
+const sidebarLinks = document.querySelectorAll('#sidebar .nav-link'); 
 
-// Toggle the 'active' class on the sidebar and prevent scrolling on the body
+// Toggle the 'active' class 
 hamburgerIcon.addEventListener('click', function() {
     sidebar.classList.toggle('active');
-    body.classList.toggle('sidebar-open'); // Disable scrolling when the sidebar is open
+    body.classList.toggle('sidebar-open'); 
 });
 
-// Close sidebar when a link inside the sidebar is clicked
+// Close sidebar 
 sidebarLinks.forEach(link => {
     link.addEventListener('click', function() {
-        sidebar.classList.remove('active'); // Close the sidebar
-        body.classList.remove('sidebar-open'); // Enable scrolling
+        sidebar.classList.remove('active'); 
+        body.classList.remove('sidebar-open'); 
     });
 });
+
 /**
  * Hero type effect
  */
