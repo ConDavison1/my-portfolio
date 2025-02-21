@@ -1,11 +1,9 @@
-/* Global Background */
 body {
     background: #ffffff;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'raleway', sans-serif;
-    /* Note: “color: white” is overwritten by the next line */
     color: #080516;
     overflow-x: hidden;
 }
@@ -34,7 +32,9 @@ body {
     display: flex;
 }
 
-/* Sidebar Styles */
+/*--------------------------------------------------------------
+# Sidebar Styles
+--------------------------------------------------------------*/
 #sidebar {
     position: fixed;
     top: 0;
@@ -104,14 +104,14 @@ body.sidebar-open {
     overflow: hidden;
 }
 
-/* Mobile and Tablet View */
+
 @media (max-width: 1199px) {
     #sidebar {
-        left: -250px; /* Sidebar hidden by default */
+        left: -250px;
     }
 
     #sidebar.active {
-        left: 0; /* Sidebar visible when active */
+        left: 0; 
     }
 
     .hamburger {
@@ -147,24 +147,23 @@ body.sidebar-open {
         height: 100px;
     }
 
-    /* Main content should shift when sidebar is active */
+
     #main {
         margin-left: 0;
     }
 
     body.sidebar-open #main {
-        margin-left: 250px; /* Shifts the main content when the sidebar is open */
+        margin-left: 250px; 
     }
 }
 
-/* Desktop View */
 @media (min-width: 1200px) {
     #sidebar {
-        left: 0; /* Sidebar is always visible on large screens */
+        left: 0; 
     }
 
     .hamburger {
-        display: none; /* Hide hamburger icon on large screens */
+        display: none; 
     }
 
     #sidebar .sidebar-profile img {
@@ -176,7 +175,6 @@ body.sidebar-open {
         font-size: 1.2rem;
     }
 
-    /* Main content margin */
     #main {
         margin-left: 250px;
     }
@@ -185,8 +183,6 @@ body.sidebar-open {
 /*--------------------------------------------------------------
 # Introduction Section
 --------------------------------------------------------------*/
-
-/* Default state: with sidebar */
 .intro {
     min-height: 100vh;
     display: flex;
@@ -198,7 +194,7 @@ body.sidebar-open {
     opacity: 1;
     transition: opacity 1s ease-out;
     overflow: hidden;
-    margin-left: clamp(0px, 5vw, 150px); /* Adjust margin-left dynamically */
+    margin-left: clamp(0px, 5vw, 150px); 
 }
 
 /* Particles container */
@@ -226,7 +222,7 @@ body.sidebar-open {
     color: #fff;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     gap: 4vw;
-    box-sizing: border-box; /* Ensure no content goes outside */
+    box-sizing: border-box; 
 }
 
 .typed {
@@ -243,7 +239,7 @@ body.sidebar-open {
     text-align: left;
     margin-right: 5vw;
     z-index: 1;
-    position: relative; /* Ensure it moves with screen */
+    position: relative; 
 }
 
 .intro-image img {
@@ -255,32 +251,42 @@ body.sidebar-open {
     z-index: 1;
 }
 
-/*--------------------------------------------------------------
-# Responsive Adjustments for Intro Section
---------------------------------------------------------------*/
-
 @media (max-width: 768px) {
-    /* Adjust intro layout for smaller screens */
     .intro {
-        margin-left: 0; /* Remove margin-left when sidebar is hidden */
-        padding: 5% 5% 5% 5%; /* Adjust padding */
+        margin-left: 0; 
+        padding: 5% 5% 5% 5%;
     }
 
     .intro-content {
-        flex-direction: column; /* Stack elements vertically on smaller screens */
-        gap: 2vw; /* Adjust gap for smaller screens */
+        flex-direction: column; 
+        gap: 2vw; 
         width: 100%;
-        padding-left: 0; /* Remove padding for full width */
+        padding-left: 0; 
     }
 
     .intro-text {
-        margin-right: 0; /* Remove margin-right */
-        text-align: center; /* Center text for better readability */
-        position: relative; /* Ensure it moves with screen change */
+        margin-right: 0; 
+        text-align: center; 
+        position: relative; 
     }
 
     .intro-image {
-        margin-top: 2vh; /* Add space above the image */
+        margin-top: 2vh; 
+    }
+}
+@media (max-width: 480px) {
+    .intro {
+        padding: 8% 5%;
+        margin-left: 0;
+    }
+    .intro-content {
+        gap: 4vw;
+        flex-direction: column;
+    }
+    .intro-text {
+        font-size: clamp(1.2rem, 4vw, 2.5rem);
+        text-align: center;
+        margin-right: 0;
     }
 }
 
@@ -294,21 +300,23 @@ body.sidebar-open {
     justify-content: flex-start;
     align-items: center;
     text-align: center;
-    padding: 5% 5% 5% 5%;
+    padding: 5% 0 5% 0;
     margin-top: 10vh;
     box-sizing: border-box;
     opacity: 1;
     transition: padding-left 0.3s ease;
     overflow-x: hidden;
-    margin-left: clamp(0px, 5vw, 150px);
+    margin-left: clamp(0px, 20vw, 300px) !important;
+
 }
 
 .about-header {
-    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    font-size: clamp(1.5rem, 5vw, 1.5rem);
     margin-bottom: 5vh;
     color: #080516;
-    text-align: center;
+    text-align: left;
     width: 100%;
+    text-decoration: underline;
 }
 
 .about-content {
@@ -318,7 +326,6 @@ body.sidebar-open {
     align-items: flex-start;
     gap: 5vw;
     width: 100%;
-    padding-left: clamp(5%, 10vw, 15%);
     box-sizing: border-box;
     overflow-x: hidden;
 }
@@ -441,12 +448,13 @@ body.sidebar-open {
 }
 
 .projects-header {
-    text-align: center;
+    text-align: left;
     position: relative;
     top: -30vh;
     margin-bottom: 3vh;
     z-index: 1;
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 5vw, 1.5rem);
+    text-decoration: underline
 }
 
 .project-container {
@@ -634,7 +642,7 @@ body.sidebar-open {
     box-sizing: border-box;
     opacity: 0;
     transition: opacity 1s ease-out;
-    margin-left: clamp(0px, 15vw, 280px);
+    margin-left: clamp(0px, 20vw, 280px) !important; 
 }
 
 .stack.visible {
@@ -642,14 +650,12 @@ body.sidebar-open {
 }
 
 .stack-header {
-    font-size: clamp(1.5rem, 5vw, 2rem);
-    margin-bottom: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-size: clamp(1.5rem, 5vw, 1.5rem);
+    margin-bottom: 5vh;
+    color: #080516;
+    text-align: left;
     width: 100%;
-    text-align: center;
-    animation: fadeIn 1.5s ease-in-out;
+    text-decoration: underline;
 }
 
 .stack-category-container {
@@ -727,15 +733,7 @@ body.sidebar-open {
     color: gold;
 }
 
-html,
-body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
+
 
 /* Icon Colors */
 .fa-html5 { color: #e34c26; }
@@ -766,7 +764,7 @@ body {
     max-width: 90%;
     margin: auto;
     text-align: left;
-    margin-left: clamp(0px, 15vw, 280px);
+    margin-left: clamp(0px, 20vw, 280px) !important;
 }
 
 .resume.visible {
@@ -847,25 +845,9 @@ body {
     text-align: left;
 }
 
-/*--------------------------------------------------------------
-# Additional Responsive Tweaks for Extra Small Screens
---------------------------------------------------------------*/
+
 @media (max-width: 480px) {
-    /* Intro Section Adjustments */
-    .intro {
-        padding: 8% 5%;
-        margin-left: 0;
-    }
-    .intro-content {
-        gap: 4vw;
-        flex-direction: column;
-    }
-    .intro-text {
-        font-size: clamp(1.2rem, 4vw, 2.5rem);
-        text-align: center;
-        margin-right: 0;
-    }
-    /* About Section Adjustments */
+
     .about {
         padding: 5% 3%;
         margin-left: 0;
@@ -874,24 +856,20 @@ body {
         padding-left: 0;
         gap: 3vw;
     }
-    /* Stack Section Adjustments */
     .stack {
         margin-left: 0;
         padding: 20px;
     }
-    /* Resume Section Adjustments */
     .resume {
         margin-left: 0;
         padding: 2vw;
     }
-    /* Project Card Size Adjustments */
     .project-card {
         width: clamp(200px, 40vw, 300px);
         height: clamp(300px, 55vw, 400px);
     }
 }
 @media (min-width: 1200px) {
-    /* Adjust main content containers to account for the 250px sidebar */
     #main,
     .intro,
     .about,
@@ -900,4 +878,14 @@ body {
       margin-left: 250px;
     }
   }
-  
+
+
+  html,
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}

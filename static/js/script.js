@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let offset = 0; 
     
             if (this.getAttribute('href') === "#experience") {
-                offset = 850; 
+                offset = 1200; 
             }
     
             const top = target.getBoundingClientRect().top + window.scrollY - offset;
