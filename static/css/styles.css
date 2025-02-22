@@ -23,14 +23,49 @@ body {
     height: 30px;
     border-radius: 60%;
     padding: 1px;
+    transition: all 0.3s ease;
 }
+
 
 .hamburger i {
     padding-left: 5px;
     padding-top: 2px;
     color: white;
     display: flex;
+    transition: transform 0.3s ease;
 }
+
+
+body.sidebar-open .hamburger i {
+    position: relative;
+    width: 20px;
+    height: 20px;
+}
+
+body.sidebar-open .hamburger i::before,
+body.sidebar-open .hamburger i::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+}
+
+
+body.sidebar-open .hamburger i::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+body.sidebar-open .hamburger i::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+
+
 
 /*--------------------------------------------------------------
 # Sidebar Styles
