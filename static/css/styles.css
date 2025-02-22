@@ -450,13 +450,14 @@ body.sidebar-open {
 .projects-header {
     text-align: left;
     position: relative;
-    margin-bottom: 3vh;
-    z-index: 1;
+    margin-bottom: 1vh;
+    z-index: 10; 
     font-size: clamp(1.5rem, 5vw, 1.5rem);
     text-decoration: underline;
-    top: -10vh;  
+    top: 0; 
     padding-top: 2vh; 
 }
+
 .project-container {
     position: relative;
     display: flex;
@@ -466,6 +467,7 @@ body.sidebar-open {
     z-index: 0;
     flex-direction: column;
     flex-grow: 1;  
+    margin-top: 8vh;
 }
 
 .project-cards-wrapper {
@@ -569,18 +571,18 @@ body.sidebar-open {
 }
 
 .arrow-left {
-    left: calc(27% + 2vw);  /* Adds a small adjustment based on screen size */
+    left: calc(27% + 2vw);  
 }
 
 .arrow-right {
-    right: calc(27% + 2vw); /* Adds a small adjustment based on screen size */
+    right: calc(27% + 2vw); 
 }
 
 .project-dots {
     display: flex;
     justify-content: center;
     position: absolute;
-    top: calc(90% + 1vh);  /* Adjusts based on the card's height */
+    top: calc(90% + 1vh);  
     z-index: 10;
     left: 50%;
     transform: translateX(-50%);
@@ -607,6 +609,26 @@ body.sidebar-open {
 .dot:hover {
     background-color: #111010;
     transition: background-color 0.3s ease;
+}
+
+.projects-header h3 {
+    font-size: clamp(1rem, 4vw, 1.2rem); 
+    font-weight: bold;
+    text-align: center;
+    text-decoration: underline;
+    display: none; 
+}
+
+@media (max-width: 1024px) {
+    .projects-header h3 {
+        display: block; 
+    }
+}
+
+@media (min-width: 1025px) {
+    .projects-header h3 {
+        display: none; 
+    }
 }
 
 @media (max-width: 768px) {

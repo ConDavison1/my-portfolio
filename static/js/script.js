@@ -168,10 +168,10 @@ document.querySelectorAll('#intro, #about, #projects, .stack').forEach(section =
     
         isSwiping = false;
     }
-    // Prevent swipe when clicking on the "View Project" button
+    
 document.querySelectorAll('.project-link').forEach(button => {
     button.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevents the click from being treated as a swipe
+        e.stopPropagation(); 
     });
 });
 
