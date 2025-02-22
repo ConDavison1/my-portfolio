@@ -152,12 +152,28 @@ document.querySelectorAll('#intro, #about, #projects, .stack').forEach(section =
     let startX, endX, isSwiping = false;
     const projectContainer = document.querySelector('.project-container');
 
-    function handleSwipe() {
-        if (!endX) return; 
-        if (startX - endX > 50) showProject(currentProjectIndex + 1, 'right');
-        else if (endX - startX > 50) showProject(currentProjectIndex - 1, 'left');
+    function handleSwipe(e) {
+        if (!isSwiping || !endX) return; 
+        
+        const swipeDistance = Math.abs(startX - endX);
+        const swipeThreshold = 50; 
+        
+        if (swipeDistance > swipeThreshold) {
+            if (startX - endX > 0) {
+                showProject(currentProjectIndex + 1, 'right');
+            } else {
+                showProject(currentProjectIndex - 1, 'left');
+            }
+        }
+    
         isSwiping = false;
     }
+    // Prevent swipe when clicking on the "View Project" button
+document.querySelectorAll('.project-link').forEach(button => {
+    button.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevents the click from being treated as a swipe
+    });
+});
 
     projectContainer.addEventListener('touchstart', (e) => {
         startX = e.touches[0].clientX;

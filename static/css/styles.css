@@ -454,8 +454,8 @@ body.sidebar-open {
     z-index: 1;
     font-size: clamp(1.5rem, 5vw, 1.5rem);
     text-decoration: underline;
-    top: 0;  /* Remove the large negative value */
-    padding-top: 2vh; /* Add some spacing instead */
+    top: -10vh;  
+    padding-top: 2vh; 
 }
 .project-container {
     position: relative;
