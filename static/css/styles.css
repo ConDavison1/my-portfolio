@@ -450,13 +450,13 @@ body.sidebar-open {
 .projects-header {
     text-align: left;
     position: relative;
-    top: -30vh;
     margin-bottom: 3vh;
     z-index: 1;
     font-size: clamp(1.5rem, 5vw, 1.5rem);
-    text-decoration: underline
+    text-decoration: underline;
+    top: 0;  /* Remove the large negative value */
+    padding-top: 2vh; /* Add some spacing instead */
 }
-
 .project-container {
     position: relative;
     display: flex;
@@ -465,6 +465,7 @@ body.sidebar-open {
     width: 100%;
     z-index: 0;
     flex-direction: column;
+    flex-grow: 1;  
 }
 
 .project-cards-wrapper {
@@ -492,6 +493,15 @@ body.sidebar-open {
     position: absolute;
     opacity: 0;
     color: #ffffff;
+    display: flex;  
+}
+
+.project-card .content {
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .project-link {
@@ -537,12 +547,15 @@ body.sidebar-open {
     height: 60%;
     object-fit: cover;
     border-radius: 10px;
+    display: block;  
+    margin: 0 auto;  
 }
+
 
 .arrow-left,
 .arrow-right {
     position: absolute;
-    bottom: 20%;
+    bottom: calc(20% + 2vw);  
     font-size: 2vw;
     color: white;
     background-color: #080516;
@@ -556,28 +569,18 @@ body.sidebar-open {
 }
 
 .arrow-left {
-    left: 27%;
+    left: calc(27% + 2vw);  /* Adds a small adjustment based on screen size */
 }
 
 .arrow-right {
-    right: 27%;
-}
-
-.arrow-left:hover,
-.arrow-right:hover {
-    background-color: rgba(163, 159, 159, 0.7);
-}
-
-.project-card:hover {
-    transform: translateY(-10px) scale(1.05);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    right: calc(27% + 2vw); /* Adds a small adjustment based on screen size */
 }
 
 .project-dots {
     display: flex;
     justify-content: center;
     position: absolute;
-    top: 85%;
+    top: calc(90% + 1vh);  /* Adjusts based on the card's height */
     z-index: 10;
     left: 50%;
     transform: translateX(-50%);
@@ -626,6 +629,7 @@ body.sidebar-open {
         visibility: hidden;
     }
 }
+
 
 /*--------------------------------------------------------------
 # Stack Section
