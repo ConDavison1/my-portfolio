@@ -955,8 +955,44 @@ body.sidebar-open {
     }
 }
 
-html,
-body {
+
+@media (max-width: 768px) {
+    .about, .stack, .resume {
+        margin-left: 20px !important;
+        padding: 2vw; 
+    }
+}
+
+
+@media (max-width: 1024px) {
+    .about, .stack, .resume {
+        margin-left: 20px !important;
+    }
+}
+
+
+@media (max-width: 414px) {
+    .about, .stack, .resume {
+        margin-left: 10px !important; 
+    }
+}
+
+
+@media (max-width: 1230px) {
+    .about, .stack, .resume {
+        margin-left: 10vw !important;
+    }
+}
+
+
+@media (min-width: 1230px) {
+    .about, .stack, .resume {
+        margin-left: 280px !important; 
+    }
+}
+
+
+html, body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
@@ -965,13 +1001,4 @@ body {
     flex-direction: column;
 }
 
-@media (max-width: 768px) {
-    .about, .stack, .resume {
-        margin-left: 20px !important;
-    }
-}
-@media (max-width: 1230px) {
-    .about, .stack, .resume {
-        margin-left: 280px !important;
-    }
-}
+
