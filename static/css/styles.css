@@ -8,6 +8,12 @@ body {
     overflow-x: hidden;
 }
 
+
+
+
+
+
+
 /*--------------------------------------------------------------
 # HAMBURGER MENU
 --------------------------------------------------------------*/
@@ -919,41 +925,37 @@ body.sidebar-open {
 }
 
 
-@media (max-width: 480px) {
 
-    .about {
-        padding: 5% 3%;
-        margin-left: 0;
-    }
-    .about-content {
-        padding-left: 0;
-        gap: 3vw;
-    }
-    .stack {
-        margin-left: 0;
-        padding: 20px;
-    }
+@media (max-width: 480px) {
+    .about,
+    .stack,
     .resume {
         margin-left: 0;
         padding: 2vw;
     }
+
+    .about-content {
+        padding-left: 0;
+        gap: 3vw;
+    }
+
     .project-card {
         width: clamp(200px, 40vw, 300px);
         height: clamp(300px, 55vw, 400px);
     }
 }
+
 @media (min-width: 1200px) {
     #main,
     .intro,
     .about,
     .stack,
     .resume {
-      margin-left: 250px;
+        margin-left: 250px; 
     }
-  }
+}
 
-
-  html,
+html,
 body {
     margin: 0;
     padding: 0;
@@ -961,4 +963,15 @@ body {
     width: 100%;
     display: flex;
     flex-direction: column;
+}
+
+@media (max-width: 768px) {
+    .about, .stack, .resume {
+        margin-left: 20px !important;
+    }
+}
+@media (max-width: 1230px) {
+    .about, .stack, .resume {
+        margin-left: 280px !important;
+    }
 }
