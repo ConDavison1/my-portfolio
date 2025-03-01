@@ -496,7 +496,7 @@ body.sidebar-open {
     opacity: 1;
     transition: padding-left 0.3s ease;
     overflow-x: hidden;
-    margin-left: clamp(0px, 20vw, 300px) !important;
+    margin-left: clamp(0px, 20vw, 300px);
 }
 
 .projects-header {
@@ -558,23 +558,44 @@ body.sidebar-open {
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s ease;
-    margin-bottom: 2px;
+    margin-bottom: 10px;
 }
 
 .project-card .project-link:hover {
     background-color: #0056b3;
 }
 
-/* Responsive design */
+
 @media (max-width: 768px) {
+    .projects {
+        margin-left: 40px; 
+        padding-left: 0; 
+    }
+
+    .projects-header {
+        text-align: center;
+        margin-left: -140px; 
+    }
+
     .project-container {
         flex-direction: column;
-        gap: 5vw;
-        padding-left: 0;
+        gap: 5vw; 
     }
 
     .project-card {
-        margin: 0;
+        margin-bottom: 20px; 
+    }
+
+
+    .project-card .project-link {
+        padding: 14px 24px; 
+        margin-bottom: 20px;  
+    }
+}
+
+@media (min-width: 1024px) {
+    .projects-header {
+        margin-left: 0; 
     }
 }
 
