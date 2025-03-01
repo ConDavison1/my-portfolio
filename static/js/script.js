@@ -1,60 +1,13 @@
 document.addEventListener('DOMContentLoaded', function () {
     const projectCards = document.querySelectorAll('.project-card');
-    const arrowLeft = document.querySelector('.arrow-left');
-    const arrowRight = document.querySelector('.arrow-right');
-    const dots = document.querySelectorAll('.dot');
-    let currentProjectIndex = 0;
-    let isTransitioning = false;
 
-    function showProject(index, direction) {
-        if (isTransitioning) return;
-        isTransitioning = true;
-
-        if (index < 0) index = projectCards.length - 1;
-        if (index >= projectCards.length) index = 0;
-
-        projectCards.forEach((card, i) => {
-            card.classList.remove('visible', 'slide-left', 'slide-right');
-            card.style.transition = 'transform 0.5s ease, opacity 0.5s ease';
-            card.style.opacity = '0';
-
-            if (i === index) {
-                card.classList.add('visible');
-                card.style.opacity = '1';
-                card.style.transform = 'translateX(0)';
-            } else if (i === currentProjectIndex) {
-                card.style.opacity = '0';
-                card.style.transform = direction === 'right' ? 'translateX(-100%)' : 'translateX(100%)';
-            } else {
-                card.style.transform = direction === 'right' ? 'translateX(100%)' : 'translateX(-100%)';
-            }
-        });
-
-        updateActiveDot(index);
-        currentProjectIndex = index;
-        setTimeout(() => { isTransitioning = false; }, 500);
-    }
-
-    function updateActiveDot(index) {
-        dots.forEach(dot => dot.classList.remove('active'));
-        dots[index].classList.add('active');
-    }
-
-    arrowLeft.addEventListener('click', () => showProject(currentProjectIndex - 1, 'left'));
-    arrowRight.addEventListener('click', () => showProject(currentProjectIndex + 1, 'right'));
-
-    dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
-            if (index !== currentProjectIndex) {
-                showProject(index, index > currentProjectIndex ? 'right' : 'left');
-            }
-        });
+    // Grid layout
+    projectCards.forEach(card => {
+        card.style.opacity = '1';
+        card.style.transform = 'translateX(0)';
     });
 
-    // Initialize the first project
-    showProject(currentProjectIndex, 'right');
-
-    // Smooth scrolling for anchor links
+    // Smooth scrolling 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -74,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Mobile navigation
+    // Mobile navigation 
     const hamburgerIcon = document.getElementById('hamburger-icon');
     const navbarContainer = document.querySelector('.navbar-container');
 
@@ -82,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
         navbarContainer.classList.toggle('active');
     });
 
-    // Intersection Observer
+    // Intersection Observer 
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.target.id === 'intro') {
@@ -125,75 +78,21 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }, { threshold: 0 });
     
-    // Observe all relevant sections
+    // Observe 
     document.querySelectorAll('#intro, #about, #projects, .stack, .resume').forEach(section => {
         observer.observe(section);
     });
 
-    document.querySelectorAll('.project-link').forEach(button => {
-        button.addEventListener('click', (e) => {
-            e.stopPropagation(); 
-        });
-    });
-    
-    let startX, endX, isSwiping = false;
-    const projectContainer = document.querySelector('.project-container');
-    
-    function handleSwipe(e) {
-        if (!isSwiping || !endX) return; 
-        
-        const swipeDistance = Math.abs(startX - endX);
-        const swipeThreshold = 50; 
-        
-        if (swipeDistance > swipeThreshold) {
-            if (startX - endX > 0) {
-                showProject(currentProjectIndex + 1, 'right');
-            } else {
-                showProject(currentProjectIndex - 1, 'left');
-            }
-        }
-        
-        isSwiping = false;
-    }
-    
-    projectContainer.addEventListener('touchstart', (e) => {
-        if (e.target.closest('.project-link')) return;  
-        startX = e.touches[0].clientX;
-        isSwiping = true;
-    });
-    
-    projectContainer.addEventListener('touchmove', (e) => {
-        if (e.target.closest('.project-link')) return; 
-        if (isSwiping) endX = e.touches[0].clientX;
-    });
-    
-    projectContainer.addEventListener('touchend', handleSwipe);
-    
-    projectContainer.addEventListener('mousedown', (e) => {
-        if (e.target.closest('.project-link')) return;  
-        startX = e.clientX;
-        isSwiping = true;
-    });
-    
-    projectContainer.addEventListener('mousemove', (e) => {
-        if (e.target.closest('.project-link')) return;  
-        if (isSwiping) endX = e.clientX;
-    });
-    
-    projectContainer.addEventListener('mouseup', handleSwipe);
-    
-
+    // Sidebar
     const sidebar = document.getElementById('sidebar');
     const body = document.body;
     const sidebarLinks = document.querySelectorAll('#sidebar .nav-link'); 
 
-    // Toggle the 'active' class 
     hamburgerIcon.addEventListener('click', function() {
         sidebar.classList.toggle('active');
         body.classList.toggle('sidebar-open'); 
     });
 
-    // Close sidebar 
     sidebarLinks.forEach(link => {
         link.addEventListener('click', function() {
             sidebar.classList.remove('active'); 
@@ -202,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     /**
-     * Hero type effect
+     * Hero type effect 
      */
     const typed = document.querySelector('.typed');
     if (typed) {
@@ -217,21 +116,21 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Initialize particles.js configuration
+    // particles.js 
     particlesJS('particles-js', {
         "particles": {
             "number": {
-                "value": 200, // Number of particles
+                "value": 200,
                 "density": {
                     "enable": true,
-                    "value_area": 1000 // Density area of particles
+                    "value_area": 1000 
                 }
             },
             "color": {
-                "value": "#080516" // Particle color
+                "value": "#080516" 
             },
             "shape": {
-                "type": "polygon", // Shape of the particles
+                "type": "polygon",
                 "stroke": {
                     "width": 0,
                     "color": "#000000"
@@ -241,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             },
             "opacity": {
-                "value": 0.5, // Opacity of particles
+                "value": 0.5, 
                 "random": true,
                 "anim": {
                     "enable": true,
@@ -250,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             },
             "size": {
-                "value": 4, // Particle size
+                "value": 4, 
                 "random": true,
                 "anim": {
                     "enable": true,
@@ -260,8 +159,8 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             "line_linked": {
                 "enable": true,
-                "distance": 150, // Distance between connected particles
-                "color": "#ffffff", // Line color
+                "distance": 150, 
+                "color": "#ffffff", 
                 "opacity": 0.4,
                 "width": 1
             },
@@ -271,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 "direction": "none",
                 "random": false,
                 "straight": false,
-                "out_mode": "out", // Particles will move out of the container
+                "out_mode": "out", 
                 "bounce": false
             }
         },
@@ -280,11 +179,11 @@ document.addEventListener('DOMContentLoaded', function () {
             "events": {
                 "onhover": {
                     "enable": true,
-                    "mode": "repulse" // Repel particles when hovering over them
+                    "mode": "repulse" 
                 },
                 "onclick": {
                     "enable": true,
-                    "mode": "push" // Push particles when clicking
+                    "mode": "push" 
                 }
             },
             "modes": {
