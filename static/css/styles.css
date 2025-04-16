@@ -539,9 +539,9 @@ body.sidebar-open {
     margin-bottom: 8px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Keep content at the top */
-    height: auto; /* Allow dynamic height */
-    min-height: 320px; /* Minimum height for the card */
+    justify-content: flex-start; 
+    height: auto; 
+    min-height: 320px; 
 }
 
 .project-card img {
