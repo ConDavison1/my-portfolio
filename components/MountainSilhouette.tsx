@@ -66,9 +66,9 @@ const MountainSilhouette: React.FC = () => {
         }}
       />
 
-      {/* Stars */}
+      {/* Stars - reduced on mobile */}
       <div className="absolute inset-0" style={{ zIndex: 1 }}>
-        {[...Array(100)].map((_, i) => (
+        {[...Array(typeof window !== 'undefined' && window.innerWidth < 768 ? 40 : 100)].map((_, i) => (
           <div
             key={i}
             className="absolute rounded-full bg-white"
@@ -171,9 +171,9 @@ const MountainSilhouette: React.FC = () => {
         ))}
       </div>
 
-      {/* Floating particles */}
+      {/* Floating particles - reduced on mobile */}
       <div className="absolute inset-0" style={{ zIndex: 9 }}>
-        {[...Array(30)].map((_, i) => (
+        {[...Array(typeof window !== 'undefined' && window.innerWidth < 768 ? 12 : 30)].map((_, i) => (
           <div
             key={i}
             className="absolute rounded-full"

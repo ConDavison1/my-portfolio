@@ -98,42 +98,42 @@ const Terminal: React.FC = () => {
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 w-[90vw] md:w-[600px] h-[400px] bg-bg-dark/95 backdrop-blur-md border border-white/10 rounded-lg shadow-2xl flex flex-col font-mono text-sm overflow-hidden animate-in slide-in-from-bottom-10 fade-in duration-300">
+    <div className="fixed bottom-0 right-0 md:bottom-6 md:right-6 z-50 w-full md:w-[600px] h-[50vh] md:h-[400px] bg-bg-dark/98 md:bg-bg-dark/95 backdrop-blur-md border-t md:border border-white/10 md:rounded-lg shadow-2xl flex flex-col font-mono text-sm overflow-hidden animate-in slide-in-from-bottom-10 fade-in duration-300">
       {/* Title Bar */}
-      <div className="bg-white/5 px-4 py-2 flex items-center justify-between border-b border-white/5 handle cursor-move">
+      <div className="bg-white/5 px-4 py-3 md:py-2 flex items-center justify-between border-b border-white/5">
         <div className="flex items-center gap-2 text-text-secondary">
           <TerminalIcon className="w-4 h-4" />
-          <span>connor@portfolio:~</span>
+          <span className="text-xs md:text-sm">connor@portfolio:~</span>
         </div>
-        <div className="flex items-center gap-2">
-          <button onClick={() => setIsMinimized(true)} className="p-1 hover:bg-white/10 rounded text-text-secondary hover:text-white">
-            <Minus className="w-3 h-3" />
+        <div className="flex items-center gap-3 md:gap-2">
+          <button onClick={() => setIsMinimized(true)} className="p-2 md:p-1 hover:bg-white/10 rounded text-text-secondary hover:text-white">
+            <Minus className="w-4 h-4 md:w-3 md:h-3" />
           </button>
-          <button onClick={() => setIsOpen(false)} className="p-1 hover:bg-red-500/20 rounded text-text-secondary hover:text-red-400">
-            <X className="w-3 h-3" />
+          <button onClick={() => setIsOpen(false)} className="p-2 md:p-1 hover:bg-red-500/20 rounded text-text-secondary hover:text-red-400">
+            <X className="w-4 h-4 md:w-3 md:h-3" />
           </button>
         </div>
       </div>
 
       {/* Terminal Content */}
-      <div 
-        className="flex-1 p-4 overflow-y-auto custom-scrollbar"
+      <div
+        className="flex-1 p-3 md:p-4 overflow-y-auto custom-scrollbar"
         onClick={() => inputRef.current?.focus()}
       >
         {history.map((entry, idx) => (
           <div key={idx} className="mb-2">
             {entry.type === 'input' ? (
-              <div className="flex gap-2 text-text-secondary">
+              <div className="flex gap-2 text-text-secondary text-xs md:text-sm">
                 <span className="text-accent">➜</span>
                 <span className="text-accent">~</span>
                 <span>{entry.content}</span>
               </div>
             ) : (
-              <div className="text-gray-300 whitespace-pre-wrap ml-4">{entry.content}</div>
+              <div className="text-gray-300 whitespace-pre-wrap ml-4 text-xs md:text-sm">{entry.content}</div>
             )}
           </div>
         ))}
-        
+
         <form onSubmit={handleSubmit} className="flex gap-2 text-text-secondary">
           <span className="text-accent">➜</span>
           <span className="text-accent">~</span>
@@ -142,9 +142,11 @@ const Terminal: React.FC = () => {
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            className="flex-1 bg-transparent outline-none text-white border-none p-0 focus:ring-0"
+            className="flex-1 bg-transparent outline-none text-white border-none p-0 focus:ring-0 text-base md:text-sm"
             autoFocus
             spellCheck={false}
+            autoComplete="off"
+            autoCapitalize="off"
           />
         </form>
         <div ref={endRef} />

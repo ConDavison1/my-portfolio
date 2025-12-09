@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface Particle {
   id: number;
@@ -12,7 +12,11 @@ interface Particle {
 
 const FloatingParticles: React.FC = () => {
   const [particles] = useState<Particle[]>(() => {
-    return [...Array(40)].map((_, i) => ({
+    // Reduce particles on mobile for better performance
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    const particleCount = isMobile ? 15 : 40;
+
+    return [...Array(particleCount)].map((_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
