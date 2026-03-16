@@ -1,84 +1,104 @@
 import React from 'react';
 import { PERSONAL_INFO, EDUCATION } from '../constants';
 import { SectionId } from '../types';
-import { GraduationCap, MapPin, Code2 } from 'lucide-react';
+import { GraduationCap, MapPin, Briefcase, Sparkles } from 'lucide-react';
 import RevealOnScroll from './RevealOnScroll';
 
 const About: React.FC = () => {
   return (
-    <section id={SectionId.ABOUT} className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-        
-        {/* Left Col: Narrative */}
-        <RevealOnScroll>
-          <div>
-            <h2 className="text-sm font-semibold text-accent uppercase tracking-wider mb-2">About Me</h2>
-            <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Engineering scalable solutions for complex problems.
-            </h3>
-            
-            <div className="prose prose-invert text-text-secondary text-lg leading-relaxed space-y-6">
-              <p>
-                I am a Software Developer based in <span className="text-white font-medium">Calgary, AB</span>, driven by a passion for building robust back-end systems and intuitive user interfaces.
-              </p>
-              <p>
-                With deep expertise in <span className="text-white">Go, C#/.NET, and Python</span>, I focus on creating production-grade APIs and microservices that stand the test of time. My approach combines clean architecture principles with pragmatic problem-solving.
-              </p>
-              <p>
-                Currently, I'm leveraging cloud-native technologies to build multi-tenant platforms and real-time data pipelines.
-              </p>
+    <section id={SectionId.ABOUT} className="py-16 md:py-28 px-4 md:px-6 max-w-6xl mx-auto">
+      <div className="section-divider mb-16 md:mb-28" />
+
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-16 items-start">
+        {/* Left: Narrative (3 cols) */}
+        <div className="lg:col-span-3">
+          <RevealOnScroll>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 rounded-lg bg-accent/10">
+                <Sparkles className="w-4 h-4 text-accent" />
+              </div>
+              <span className="text-sm font-medium text-accent tracking-wide uppercase">About Me</span>
             </div>
 
-            <div className="mt-8 flex items-center gap-4">
-               <div className="flex items-center text-sm text-text-secondary">
-                  <MapPin className="w-4 h-4 mr-2 text-accent" />
-                  {PERSONAL_INFO.location}
-               </div>
-               <div className="h-4 w-[1px] bg-white/10"></div>
-               <div className="flex items-center text-sm text-text-secondary">
-                  <Code2 className="w-4 h-4 mr-2 text-accent" />
-                  Full Stack Developer
-               </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-text-primary leading-tight mb-8">
+              Engineering scalable solutions<br />
+              <span className="gradient-text">for complex problems.</span>
+            </h2>
+          </RevealOnScroll>
+
+          <RevealOnScroll delay={150}>
+            <div className="space-y-5 text-text-secondary text-lg leading-relaxed">
+              <p>
+                I'm a Software Developer based in <span className="text-text-primary font-medium">Calgary, AB</span>, driven by a passion for building robust back-end systems and intuitive user interfaces.
+              </p>
+              <p>
+                With deep expertise in <span className="text-text-primary font-medium">Go, C#/.NET, and Python</span>, I focus on creating production-grade APIs and microservices that stand the test of time. My approach combines clean architecture principles with pragmatic problem-solving.
+              </p>
+              <p>
+                Currently leveraging cloud-native technologies to build multi-tenant platforms and real-time data pipelines.
+              </p>
             </div>
-          </div>
-        </RevealOnScroll>
+          </RevealOnScroll>
 
-        {/* Right Col: Education & Stats */}
-        <RevealOnScroll delay={200}>
-            <div className="space-y-6">
-                {/* Education Card */}
-                <div className="glass-panel p-8 rounded-xl relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
-                    <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
-                        <GraduationCap className="w-32 h-32" />
-                    </div>
-                    
-                    <h4 className="text-xl font-bold text-white mb-1">Education</h4>
-                    <p className="text-sm text-text-secondary mb-6">Academic Background</p>
+          <RevealOnScroll delay={300}>
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.04] border border-white/[0.06] text-sm text-text-secondary">
+                <MapPin className="w-3.5 h-3.5 text-accent" />
+                {PERSONAL_INFO.location}
+              </div>
+              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.04] border border-white/[0.06] text-sm text-text-secondary">
+                <Briefcase className="w-3.5 h-3.5 text-accent" />
+                Lead Software Engineer
+              </div>
+            </div>
+          </RevealOnScroll>
+        </div>
 
-                    <div className="space-y-4 relative z-10">
-                        <div>
-                            <div className="flex justify-between items-baseline mb-1">
-                                <h5 className="font-semibold text-white">{EDUCATION.degree}</h5>
-                                <span className="text-xs font-mono text-accent bg-accent/10 px-2 py-1 rounded">{EDUCATION.period}</span>
-                            </div>
-                            <p className="text-text-secondary">{EDUCATION.institution}</p>
-                        </div>
+        {/* Right: Education Card (2 cols) */}
+        <div className="lg:col-span-2">
+          <RevealOnScroll delay={200} direction="right">
+            <div className="glass-card card-shine rounded-2xl p-8 relative">
+              {/* Decorative corner gradient */}
+              <div className="absolute top-0 right-0 w-32 h-32 opacity-10 pointer-events-none"
+                style={{ background: 'radial-gradient(circle at top right, #818cf8, transparent 70%)' }}
+              />
 
-                        <div className="pt-4 border-t border-white/5">
-                            <p className="text-sm text-gray-400 mb-3">Key Coursework</p>
-                            <div className="flex flex-wrap gap-2">
-                                {EDUCATION.courses.map((course, i) => (
-                                    <span key={i} className="text-xs text-text-secondary bg-white/5 px-2 py-1 rounded border border-white/5">
-                                        {course}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-2.5 rounded-xl bg-accent/10">
+                  <GraduationCap className="w-5 h-5 text-accent" />
                 </div>
-            </div>
-        </RevealOnScroll>
+                <div>
+                  <h3 className="text-lg font-bold text-text-primary">Education</h3>
+                  <p className="text-xs text-text-muted">Academic Background</p>
+                </div>
+              </div>
 
+              <div className="space-y-5">
+                <div>
+                  <h4 className="font-semibold text-text-primary mb-1">{EDUCATION.degree}</h4>
+                  <p className="text-sm text-text-secondary mb-2">{EDUCATION.institution}</p>
+                  <span className="inline-block text-xs font-medium text-accent bg-accent/10 px-3 py-1 rounded-full">
+                    {EDUCATION.period}
+                  </span>
+                </div>
+
+                <div className="pt-5 border-t border-white/[0.06]">
+                  <p className="text-xs text-text-muted uppercase tracking-wider mb-3 font-medium">Key Coursework</p>
+                  <div className="flex flex-wrap gap-2">
+                    {EDUCATION.courses.map((course, i) => (
+                      <span
+                        key={i}
+                        className="text-xs text-text-secondary bg-white/[0.04] px-3 py-1.5 rounded-lg border border-white/[0.06]"
+                      >
+                        {course}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </RevealOnScroll>
+        </div>
       </div>
     </section>
   );
