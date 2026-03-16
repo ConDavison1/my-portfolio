@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { PERSONAL_INFO } from '../constants';
-import { ChevronDown, Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
 import { SectionId } from '../types';
-import Wizard from './Wizard';
-import MountainSilhouette from './MountainSilhouette';
 
 const Hero: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    setIsLoaded(true);
+    // Small delay for initial page load animation
+    const timer = setTimeout(() => setIsLoaded(true), 100);
+    return () => clearTimeout(timer);
   }, []);
 
   const scrollToAbout = () => {
@@ -17,69 +17,131 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section id={SectionId.HERO} className="relative min-h-screen flex flex-col justify-center items-center px-4 overflow-hidden pt-16">
-      <MountainSilhouette />
-      <Wizard />
-      
-      {/* Content Container */}
-      <div className="z-10 text-center max-w-4xl relative">
-        
+    <section
+      id={SectionId.HERO}
+      className="relative min-h-screen flex flex-col justify-center items-center px-6 overflow-hidden"
+    >
+      {/* Hero-specific glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-[0.07] pointer-events-none"
+        style={{ background: 'radial-gradient(circle, #818cf8 0%, transparent 70%)' }}
+      />
+
+      <div className="relative z-10 text-center max-w-4xl">
+        {/* Status badge */}
+        <div
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.04] border border-white/[0.06] mb-8"
+          style={{
+            opacity: isLoaded ? 1 : 0,
+            transform: isLoaded ? 'translateY(0)' : 'translateY(20px)',
+            filter: isLoaded ? 'blur(0)' : 'blur(8px)',
+            transition: 'all 0.8s cubic-bezier(0.23, 1, 0.32, 1) 200ms',
+          }}
+        >
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="text-sm text-text-secondary">Available for collaboration</span>
+        </div>
+
         {/* Name */}
-        <h1 
-          className={`text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight leading-tight transition-all duration-1000 delay-300 transform ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        <h1
+          className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-[1.05] mb-6"
+          style={{
+            opacity: isLoaded ? 1 : 0,
+            transform: isLoaded ? 'translateY(0)' : 'translateY(30px)',
+            filter: isLoaded ? 'blur(0)' : 'blur(10px)',
+            transition: 'all 1s cubic-bezier(0.23, 1, 0.32, 1) 400ms',
+          }}
         >
-          {PERSONAL_INFO.name}
+          <span className="text-text-primary">Hi, I'm </span>
+          <span className="gradient-text">{PERSONAL_INFO.name.split(' ')[0]}</span>
         </h1>
-        
-        {/* Title */}
-        <p 
-          className={`text-xl md:text-2xl text-text-secondary mb-8 max-w-2xl mx-auto font-light transition-all duration-1000 delay-500 transform ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+
+        {/* Subtitle */}
+        <p
+          className="text-base sm:text-lg md:text-2xl text-text-secondary max-w-2xl mx-auto font-light leading-relaxed mb-10"
+          style={{
+            opacity: isLoaded ? 1 : 0,
+            transform: isLoaded ? 'translateY(0)' : 'translateY(30px)',
+            filter: isLoaded ? 'blur(0)' : 'blur(8px)',
+            transition: 'all 1s cubic-bezier(0.23, 1, 0.32, 1) 600ms',
+          }}
         >
-          {PERSONAL_INFO.title} specializing in distributed systems, API architecture, and cloud-native solutions.
+          Software Engineer building{' '}
+          <span className="text-text-primary font-medium">distributed systems</span>,{' '}
+          <span className="text-text-primary font-medium">APIs</span>, and{' '}
+          <span className="text-text-primary font-medium">cloud-native</span> solutions.
         </p>
 
         {/* CTA Buttons */}
-        <div 
-          className={`flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 transition-all duration-1000 delay-700 transform ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        <div
+          className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-14"
+          style={{
+            opacity: isLoaded ? 1 : 0,
+            transform: isLoaded ? 'translateY(0)' : 'translateY(30px)',
+            filter: isLoaded ? 'blur(0)' : 'blur(8px)',
+            transition: 'all 1s cubic-bezier(0.23, 1, 0.32, 1) 800ms',
+          }}
         >
-           <a 
-             href={`mailto:${PERSONAL_INFO.email}`} 
-             className="px-8 py-3.5 bg-white text-black hover:bg-gray-200 font-semibold rounded transition-colors w-full sm:w-auto hover:shadow-[0_0_20px_rgba(255,255,255,0.3)]"
-           >
-             Get in Touch
-           </a>
-           <a 
-             href="#projects"
-             className="px-8 py-3.5 bg-transparent text-white border border-white/20 hover:border-white hover:bg-white/5 font-medium rounded transition-all w-full sm:w-auto backdrop-blur-sm"
-           >
-             View Projects
-           </a>
+          <a
+            href={`mailto:${PERSONAL_INFO.email}`}
+            className="btn-glow px-8 py-3.5 text-white font-semibold rounded-xl text-sm w-full sm:w-auto"
+          >
+            Get in Touch
+          </a>
+          <a
+            href="#projects"
+            className="px-8 py-3.5 text-text-primary bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.08] hover:border-white/[0.15] font-medium rounded-xl transition-all duration-300 text-sm w-full sm:w-auto"
+          >
+            View Projects
+          </a>
         </div>
 
         {/* Social Links */}
-        <div 
-          className={`flex gap-6 justify-center transition-all duration-1000 delay-900 transform ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        <div
+          className="flex gap-4 justify-center"
+          style={{
+            opacity: isLoaded ? 1 : 0,
+            transform: isLoaded ? 'translateY(0)' : 'translateY(20px)',
+            transition: 'all 1s cubic-bezier(0.23, 1, 0.32, 1) 1000ms',
+          }}
         >
-             <a href={PERSONAL_INFO.github} target="_blank" rel="noopener noreferrer" className="text-text-secondary hover:text-white transition-colors hover:scale-110 transform duration-200">
-                <Github className="w-6 h-6" />
-             </a>
-             <a href={PERSONAL_INFO.linkedin} target="_blank" rel="noopener noreferrer" className="text-text-secondary hover:text-white transition-colors hover:scale-110 transform duration-200">
-                <Linkedin className="w-6 h-6" />
-             </a>
-             <a href={`mailto:${PERSONAL_INFO.email}`} className="text-text-secondary hover:text-white transition-colors hover:scale-110 transform duration-200">
-                <Mail className="w-6 h-6" />
-             </a>
+          {[
+            { href: PERSONAL_INFO.github, icon: Github, label: 'GitHub' },
+            { href: PERSONAL_INFO.linkedin, icon: Linkedin, label: 'LinkedIn' },
+            { href: `mailto:${PERSONAL_INFO.email}`, icon: Mail, label: 'Email' },
+          ].map(({ href, icon: Icon, label }) => (
+            <a
+              key={label}
+              href={href}
+              target={label !== 'Email' ? '_blank' : undefined}
+              rel={label !== 'Email' ? 'noopener noreferrer' : undefined}
+              className="p-3.5 md:p-3 rounded-xl bg-white/[0.03] border border-white/[0.06] text-text-secondary hover:text-text-primary hover:bg-white/[0.06] hover:border-white/[0.1] transition-all duration-300 hover:-translate-y-1"
+              aria-label={label}
+            >
+              <Icon className="w-5 h-5" />
+            </a>
+          ))}
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div 
-        className={`absolute bottom-10 animate-bounce cursor-pointer text-text-secondary hover:text-accent transition-all duration-1000 delay-1000 transform ${isLoaded ? 'opacity-100' : 'opacity-0'}`} 
+      {/* Scroll indicator */}
+      <button
         onClick={scrollToAbout}
+        className="absolute bottom-10 text-text-muted hover:text-text-secondary transition-colors"
+        style={{
+          opacity: isLoaded ? 1 : 0,
+          transition: 'opacity 1s ease 1.4s',
+          animation: isLoaded ? 'bounce 2s ease-in-out infinite 2s' : 'none',
+        }}
       >
-        <ChevronDown className="w-6 h-6" />
-      </div>
+        <ArrowDown className="w-5 h-5" />
+      </button>
 
+      <style>{`
+        @keyframes bounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(8px); }
+        }
+      `}</style>
     </section>
   );
 };
