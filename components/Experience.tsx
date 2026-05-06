@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { EXPERIENCE, PROJECTS } from '../constants';
 import { SectionId } from '../types';
-import { ArrowUpRight, ExternalLink } from 'lucide-react';
+import { ArrowUpRight, ExternalLink, X } from 'lucide-react';
 import RevealOnScroll from './RevealOnScroll';
 
 const Experience: React.FC = () => {
+  const [lightbox, setLightbox] = useState<{ type: 'video' | 'image'; src: string } | null>(null);
+
   return (
     <div>
       {/* Work Experience */}
@@ -105,7 +107,10 @@ const Experience: React.FC = () => {
                 />
 
                 {project.video && (
-                  <div className="mb-5 rounded-xl overflow-hidden border border-white/[0.06]">
+                  <div
+                    className="mb-5 rounded-xl overflow-hidden border border-white/[0.06] cursor-pointer"
+                    onClick={() => setLightbox({ type: 'video', src: project.video! })}
+                  >
                     <video
                       src={project.video}
                       autoPlay
@@ -118,7 +123,10 @@ const Experience: React.FC = () => {
                 )}
 
                 {project.image && !project.video && (
-                  <div className="mb-5 rounded-xl overflow-hidden border border-white/[0.06]">
+                  <div
+                    className="mb-5 rounded-xl overflow-hidden border border-white/[0.06] cursor-pointer"
+                    onClick={() => setLightbox({ type: 'image', src: project.image! })}
+                  >
                     <img
                       src={project.image}
                       alt={project.title}
@@ -181,6 +189,42 @@ const Experience: React.FC = () => {
           ))}
         </div>
       </section>
+
+      {/* Lightbox Modal */}
+      {lightbox && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+          onClick={() => setLightbox(null)}
+        >
+          <button
+            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors"
+            onClick={() => setLightbox(null)}
+          >
+            <X className="w-8 h-8" />
+          </button>
+          <div
+            className="max-w-5xl w-full max-h-[90vh] rounded-2xl overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {lightbox.type === 'video' ? (
+              <video
+                src={lightbox.src}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full max-h-[90vh] object-contain"
+              />
+            ) : (
+              <img
+                src={lightbox.src}
+                alt="Project preview"
+                className="w-full max-h-[90vh] object-contain"
+              />
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
