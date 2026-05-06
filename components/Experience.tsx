@@ -104,6 +104,19 @@ const Experience: React.FC = () => {
                   style={{ background: 'radial-gradient(circle at top right, #818cf8, transparent 70%)' }}
                 />
 
+                {project.video && (
+                  <div className="mb-5 rounded-xl overflow-hidden border border-white/[0.06]">
+                    <video
+                      src={project.video}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="w-full"
+                    />
+                  </div>
+                )}
+
                 <div className="flex items-start justify-between gap-4 mb-2">
                   <div>
                     <h3 className="text-xl font-bold text-text-primary mb-1 flex items-center gap-2">

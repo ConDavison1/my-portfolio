@@ -93,7 +93,8 @@ export const PROJECTS: Project[] = [
       "Integrated Stripe billing with tiered subscriptions, JWT auth, admin panel, and multi-tenant org support.",
       "Designed for privacy-sensitive industries — supports fully airgapped deployment with local LLMs via Ollama."
     ],
-    tech: ["Go", "C#/.NET 8", "Python", "React", "FastAPI", "PostgreSQL", "pgvector", "Docker", "Ollama", "Playwright", "Stripe API"]
+    tech: ["Go", "C#/.NET 8", "Python", "React", "FastAPI", "PostgreSQL", "pgvector", "Docker", "Ollama", "Playwright", "Stripe API"],
+    video: "/encapsulai-demo.webm"
   },
   {
     title: "Rise Basketball Platform",

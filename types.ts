@@ -19,6 +19,7 @@ export interface Project {
   description: string[];
   tech: string[];
   link?: string;
+  video?: string;
 }
 
 export interface Education {
