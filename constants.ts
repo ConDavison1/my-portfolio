@@ -107,7 +107,8 @@ export const PROJECTS: Project[] = [
       "Deployed microservices using Docker and Google Cloud Run."
     ],
     tech: ["Go", "PostgreSQL", "Stripe Connect", "Docker", "GCP", "Redis"],
-    link: "https://www.rise-basketball.com/"
+    link: "https://www.rise-basketball.com/",
+    image: "/rise-basketball.png"
   },
   {
     title: "Sales Analytics Dashboard (Capstone)",

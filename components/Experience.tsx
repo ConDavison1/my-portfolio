@@ -117,6 +117,16 @@ const Experience: React.FC = () => {
                   </div>
                 )}
 
+                {project.image && !project.video && (
+                  <div className="mb-5 rounded-xl overflow-hidden border border-white/[0.06]">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full"
+                    />
+                  </div>
+                )}
+
                 <div className="flex items-start justify-between gap-4 mb-2">
                   <div>
                     <h3 className="text-xl font-bold text-text-primary mb-1 flex items-center gap-2">

@@ -20,6 +20,7 @@ export interface Project {
   tech: string[];
   link?: string;
   video?: string;
+  image?: string;
 }
 
 export interface Education {
