@@ -48,7 +48,7 @@ const About: React.FC = () => {
               </div>
               <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.04] border border-white/[0.06] text-sm text-text-secondary">
                 <Briefcase className="w-3.5 h-3.5 text-accent" />
-                Lead Software Engineer
+                Lead Backend Developer
               </div>
             </div>
           </RevealOnScroll>

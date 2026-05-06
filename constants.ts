@@ -37,7 +37,7 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
 
 export const EXPERIENCE: JobExperience[] = [
   {
-    title: "Lead Software Engineer",
+    title: "Lead Backend Developer",
     company: "Havenz Tech",
     location: "Calgary, AB",
     period: "April 2025 – Present",
