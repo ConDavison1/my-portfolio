@@ -112,7 +112,7 @@ const Experience: React.FC = () => {
                       loop
                       muted
                       playsInline
-                      className="w-full h-52 object-cover object-top"
+                      className="w-full h-72 object-cover object-top"
                     />
                   </div>
                 )}
@@ -122,7 +122,7 @@ const Experience: React.FC = () => {
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-52 object-cover object-top"
+                      className="w-full h-72 object-cover object-top"
                     />
                   </div>
                 )}
