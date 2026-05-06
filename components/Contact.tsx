@@ -18,7 +18,7 @@ const Contact: React.FC = () => {
               <span className="gradient-text">together.</span>
             </h2>
             <p className="text-text-secondary text-lg max-w-xl mx-auto leading-relaxed mb-12">
-              Currently working as a Lead Software Engineer at Havenz Tech. Always happy to connect — feel free to reach out about tech, projects, or just to say hi.
+              Currently working as a Lead Backend Developer at Havenz Tech. Always happy to connect, feel free to reach out about tech, projects, or just to say hi.
             </p>
           </RevealOnScroll>
 
