@@ -9,7 +9,7 @@ export const PERSONAL_INFO = {
   phone: "403-968-2395",
   github: "https://github.com/ConDavison1",
   linkedin: "https://www.linkedin.com/in/connor-davison-1a7367279/",
-  summary: "Detail-oriented Software Developer with hands-on experience designing and deploying production-grade APIs and microservices. Skilled in building full-stack solutions using Go, C#/.NET, Python, Angular, and React with cloud-native deployments. Demonstrated ability to architect multi-tenant systems, integrate payment platforms (Stripe, Square) and build real-time IoT data pipelines. Proven track record delivering complex features in agile teams."
+  summary: "Detail-oriented Software Developer with hands-on experience designing and deploying production-grade APIs, microservices, and AI-powered platforms. Skilled in building full-stack solutions using Go, C#/.NET, Python, and React with cloud-native and self-hosted deployments. Demonstrated ability to architect multi-tenant systems, build RAG pipelines with local LLMs, integrate payment platforms (Stripe, Square), and orchestrate multi-language microservice architectures. Proven track record delivering complex features in agile teams."
 };
 
 export const SKILL_CATEGORIES: SkillCategory[] = [

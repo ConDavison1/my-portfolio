@@ -29,13 +29,13 @@ const About: React.FC = () => {
           <RevealOnScroll delay={150}>
             <div className="space-y-5 text-text-secondary text-lg leading-relaxed">
               <p>
-                I'm a Software Developer based in <span className="text-text-primary font-medium">Calgary, AB</span>, driven by a passion for building robust back-end systems and intuitive user interfaces.
+                I'm a Software Developer based in <span className="text-text-primary font-medium">Calgary, AB</span>, driven by a passion for building robust back-end systems, AI-powered platforms, and intuitive user interfaces.
               </p>
               <p>
-                With deep expertise in <span className="text-text-primary font-medium">Go, C#/.NET, and Python</span>, I focus on creating production-grade APIs and microservices that stand the test of time. My approach combines clean architecture principles with pragmatic problem-solving.
+                With deep expertise in <span className="text-text-primary font-medium">Go, C#/.NET, and Python</span>, I architect production-grade microservices and APIs — from multi-tenant SaaS platforms to self-hosted AI systems with local LLMs, RAG pipelines, and real-time transcription.
               </p>
               <p>
-                Currently leveraging cloud-native technologies to build multi-tenant platforms and real-time data pipelines.
+                Currently building <span className="text-text-primary font-medium">EncapsulAI</span>, a privacy-first AI meeting intelligence platform with 10 Dockerized microservices across four languages, and leading backend development at Havenz Tech.
               </p>
             </div>
           </RevealOnScroll>
