@@ -19,19 +19,19 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
   },
   {
     category: "Web & Frameworks",
-    skills: ["React", "Angular", ".NET 8", "ASP.NET Core", "Node.js", "Flask", "Tailwind CSS", "HTML5"]
+    skills: ["React", "Angular", ".NET 8", "ASP.NET Core", "FastAPI", "Node.js", "Flask", "Tailwind CSS", "HTML5"]
   },
   {
     category: "Cloud & DevOps",
-    skills: ["Google Cloud Platform", "Docker", "GitHub Actions", "CI/CD Pipelines", "Cloud Run"]
+    skills: ["Google Cloud Platform", "Docker", "Docker Compose", "GitHub Actions", "CI/CD Pipelines", "Cloud Run", "Nginx", "Caddy"]
   },
   {
     category: "Database & Storage",
-    skills: ["PostgreSQL", "MongoDB", "Neon DB", "Entity Framework Core", "SQLc", "Goose"]
+    skills: ["PostgreSQL", "pgvector", "MongoDB", "Neon DB", "Entity Framework Core", "SQLc", "Goose"]
   },
   {
     category: "Tools & Platforms",
-    skills: ["Git/GitHub/GitLab", "Swagger/OpenAPI", "Stripe API", "Square API", "Trello", "Figma"]
+    skills: ["Git/GitHub/GitLab", "Swagger/OpenAPI", "Stripe API", "Square API", "Ollama", "Playwright", "Trello", "Figma"]
   }
 ];
 
@@ -81,6 +81,20 @@ export const EXPERIENCE: JobExperience[] = [
 ];
 
 export const PROJECTS: Project[] = [
+  {
+    title: "EncapsulAI",
+    role: "Founder & Lead Developer",
+    period: "2025 – Present",
+    description: [
+      "Built a self-hosted AI meeting intelligence platform with 10 Dockerized microservices across Go, C#, Python, and TypeScript.",
+      "Implemented audio transcription with speaker diarization using Whisper and Pyannote, plus AI-generated summaries, action items, and decisions.",
+      "Developed a RAG-powered chat system using pgvector for semantic search across meetings and uploaded documents (PDF, DOCX, XLSX, PPTX).",
+      "Created a meeting bot using Playwright that auto-joins Google Meet, Zoom, and Teams to record and transcribe meetings.",
+      "Integrated Stripe billing with tiered subscriptions, JWT auth, admin panel, and multi-tenant org support.",
+      "Designed for privacy-sensitive industries — supports fully airgapped deployment with local LLMs via Ollama."
+    ],
+    tech: ["Go", "C#/.NET 8", "Python", "React", "FastAPI", "PostgreSQL", "pgvector", "Docker", "Ollama", "Playwright", "Stripe API"]
+  },
   {
     title: "Rise Basketball Platform",
     role: "Back-End Developer",
